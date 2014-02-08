@@ -150,6 +150,7 @@ public class GameComponent extends JComponent {
 		}
 		StartButtonListner startListn = new StartButtonListner();
 		start.addActionListener(startListn);
+		buttonPanel.add(start);
 		// Objects Buttons
 		// Fan Button
 		JButton fanAdder = new JButton("Fan (" + this.fanCount + ")");
