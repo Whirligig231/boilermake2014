@@ -74,6 +74,7 @@ public class WorldManager implements Runnable {
 	}
 	
 	public void removeObject(SimObject object) {
+		this.physicsWorld.destroyBody(object.getBody());
 		this.allObjects.remove(object);
 	}
 	
