@@ -2,6 +2,6 @@
 <time 60>
 <start [150,100]>
 <on_screen  #bounce [800,500,0]#bounce [850,500,0]#bounce [900,500,0]#bounce [950,500,0]
-#rock[1000,500,0]#bounce [1050,500,0] #bounce [750,500,0] #bounce [700,500,0]#gate [950,600,-0.8]#gate [950,350,0.8]>
+#gear [1000,500,0]#bounce [1050,500,0] #bounce [750,500,0] #bounce [700,500,0]#gate [950,600,-0.8]#gate [950,350,0.8]>
 <off_screen  #fan [5] #bounce [1] #wood[4] #torch[0] #rock[1] #gear[1]>
 <end>;

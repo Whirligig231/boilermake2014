@@ -23,7 +23,6 @@ public class Main {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException exception) {
-			System.out.println("WTF IS WRONG WITH THIS S**T");
 			exception.printStackTrace();
 		}
 		new MainMenu();
