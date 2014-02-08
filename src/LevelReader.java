@@ -21,6 +21,7 @@ public class LevelReader {
 	private final int START_STRING_POSITION = 3;
 	private final int ON_SCREEN_STRING_POSITION = 4;
 	private final int OFF_SCREEN_STRING_POSITION = 5;
+	private final int BUILD_OPTION = 6;
 	
 	public LevelReader(File levelFile){
 		this.text = levelFile;
@@ -62,12 +63,14 @@ public class LevelReader {
 		String startString = fileText[START_STRING_POSITION];
 		String onScreen = fileText[ON_SCREEN_STRING_POSITION];
 		String offScreen = fileText[OFF_SCREEN_STRING_POSITION];
+		String buildOrNo = fileText[BUILD_OPTION];
 		
 		processSize(sizeString);
 		processTime(timeString);
-		processStart(startString);
+		processStart(startString);		
 		processOnScreen(onScreen);
 		processOffScreen(offScreen);
+		
 		this.gameComponent.createWorld();
 	}
 

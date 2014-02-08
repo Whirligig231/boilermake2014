@@ -371,6 +371,7 @@ public class GameComponent extends JComponent {
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
 	}
 	public void makeLevelButton(){
+		this.visual.get(0).isMoveable();
 		JButton makeLevel = new JButton("Generate Level)");
 		class MakeLevelButtonListner implements ActionListener {
 			@Override

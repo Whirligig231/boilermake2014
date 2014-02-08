@@ -7,15 +7,25 @@ public class LevelBuilder extends JFrame{
 
 	private ArrayList<SimObject> gameParts;
 	private GameComponent gameComponent;
+	private final int WIDTH = 1200;
+	private final int HEIGHT = 800;
+	private int time = 60;
 	
-	public LevelBuilder(){
-		super("Level Builder");
+	public LevelBuilder(GameComponent gameComponent){
+		this.gameComponent = gameComponent;
 		this.gameParts = new ArrayList<SimObject>();
-//		this.gameComponent = new GameComponent(, height)
+		displayObjects();
 	}
 	
-	public void buildLevel(){
-		
+	public void displayObjects(){
+		while(true) {
+//			if(gameComponent.)
+		}
 	}
+
+	
+	
 	
 }
+
+
