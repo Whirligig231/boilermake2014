@@ -60,6 +60,7 @@ public class WorldManager implements Runnable {
 	private boolean running = false;
 	private float accumulatedPhysTime = 0.0f;
 	private JPanel myCanvas;
+	private long startTime;
 	
 	public WorldManager(JPanel myCanvas, Collection<SimObject> objects) {
 		this.myCanvas = myCanvas;
@@ -184,6 +185,7 @@ public class WorldManager implements Runnable {
 		this.setRunning(true);
 		Thread runThread = new Thread(this);
 		runThread.start();
+		this.startTime = System.currentTimeMillis();
 	}
 	
 	public void stop() {
@@ -286,6 +288,8 @@ public class WorldManager implements Runnable {
 	
 	private void onWin() {
 		// Here you go Garrett
+		Long time = System.currentTimeMillis() - this.startTime;
+		
 	}
 	
 }
