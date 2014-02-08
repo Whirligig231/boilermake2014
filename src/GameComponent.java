@@ -3,13 +3,16 @@
  */
 //package src;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
-
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 /**
  * TODO Put here a description of what this class does.
  * 
@@ -28,6 +31,9 @@ public class GameComponent extends JComponent {
 		// Fan Button
 		this.frameHeight=height;
 		this.frameWidth=width;
+		JFrame gameFrame=new JFrame("Game");
+		gameFrame.setSize(this.frameWidth,this.frameHeight);
+		JPanel buttonPanel=new JPanel();
 		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
 		class FanButtonListner implements ActionListener {
 			@Override
@@ -42,6 +48,7 @@ public class GameComponent extends JComponent {
 		}
 		FanButtonListner FanListn= new FanButtonListner();
 		FanAdder.addActionListener(FanListn);
+		buttonPanel.add(FanAdder);
 		//Bouncer Button
 		JButton BouncerAdder = new JButton("Bouncer (" + this.bounceCount + ")");
 		class BouncerButtonListner implements ActionListener {
@@ -57,6 +64,9 @@ public class GameComponent extends JComponent {
 		}
 		FanButtonListner BounceListn= new FanButtonListner();
 		BouncerAdder.addActionListener(BounceListn);
+		buttonPanel.add(BouncerAdder);
+		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
+		gameFrame.add(buttonScroll,BorderLayout.EAST);
 	}
 	public void setTime(int time){
 		this.time=time; 
