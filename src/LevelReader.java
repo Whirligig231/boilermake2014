@@ -147,11 +147,12 @@ public class LevelReader {
 	
 	private void processOnScreen(String onScreenString){
 		
-		String[] gameObjects = onScreenString.split("#");
+		String[] gameObjects = onScreenString.split("#");		
 		
 		//Object data contains four fields: type, xPosition, yPosition, tilt
 		for(int i = 1; i < gameObjects.length; i++){
 			ArrayList<String> objectData = processOnScreenObject(gameObjects[i]);
+			
 			String type = objectData.get(0);
 			int xPosition = Integer.parseInt(objectData.get(1));
 			int yPosition = Integer.parseInt(objectData.get(2));
@@ -177,6 +178,7 @@ public class LevelReader {
 		
 		int start = objectString.indexOf("[") + 1;
 		int end = objectString.indexOf("]");
+		
 		
 		//should have three fields: x,y,tilt
 		String[] objectFields = objectString.substring(start,end).split(",");
