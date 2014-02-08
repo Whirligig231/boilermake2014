@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 /**
  * 
  */
@@ -24,6 +26,24 @@ public class Bounce extends SimObject {
 	public void create() {
 		// TODO Auto-generated method stub
 
+	}
+
+	/* (non-Javadoc)
+	 * @see SimObject#step()
+	 */
+	@Override
+	public void step() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see SimObject#draw(java.awt.Graphics)
+	 */
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
