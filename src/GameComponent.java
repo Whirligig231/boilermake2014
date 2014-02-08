@@ -1,8 +1,3 @@
-/**
- * 
- */
-package src;
-
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
