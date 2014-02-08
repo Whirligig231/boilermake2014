@@ -142,23 +142,33 @@ public class GameComponent extends JComponent {
 	public void generateButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-		// Objects Buttons
-		// Fan Button
-		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
-		class FanButtonListner implements ActionListener {
+		JButton start = new JButton("Start");
+		class StartButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (GameComponent.this.fanCount > 0) {
-					GameComponent.this.fanCount--;
+				//put code here
+			}
+		}
+		StartButtonListner startListn = new StartButtonListner();
+		start.addActionListener(startListn);
+		// Objects Buttons
+		// Fan Button
+		JButton fanAdder = new JButton("Fan (" + this.fanCount + ")");
+		class FanButtonListner implements ActionListener {
+			int fans=GameComponent.this.fanCount;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (this.fans > 0) {
+					this.fans--;
 					SimObject temp = new Fan(5, 5, 0);
 					temp.makeMovable(true);
 					GameComponent.this.visual.add(temp);
 				}
 			}
 		}
-		FanButtonListner FanListn = new FanButtonListner();
-		FanAdder.addActionListener(FanListn);
-		buttonPanel.add(FanAdder);
+		FanButtonListner fanListn = new FanButtonListner();
+		fanAdder.addActionListener(fanListn);
+		buttonPanel.add(fanAdder);
 		// Bouncer Button
 		JButton BouncerAdder = new JButton("Bouncer (" + this.bounceCount + ")");
 		class BouncerButtonListner implements ActionListener {
