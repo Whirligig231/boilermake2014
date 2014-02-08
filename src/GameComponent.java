@@ -8,6 +8,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -54,6 +59,61 @@ public class GameComponent extends JComponent {
 			}
 
 		};
+		this.gamePanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// Nothing!
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// Nothing!
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// Nothing!
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				GameComponent.this.theWorld.handlePress(arg0.getX(),arg0.getY(),
+						arg0.getButton());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				GameComponent.this.theWorld.handleRelease(arg0.getX(),arg0.getY(),
+						arg0.getButton());
+			}
+			
+		});
+		this.gamePanel.addMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				GameComponent.this.theWorld.handleDrag(arg0.getX(),arg0.getY(),
+						arg0.getButton());
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				// Nothing!
+			}
+
+			
+		});
+		this.gamePanel.addMouseWheelListener(new MouseWheelListener() {
+
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent arg0) {
+				GameComponent.this.theWorld.handleWheel(arg0.getX(),arg0.getY(),
+						arg0.getWheelRotation());
+			}
+
+			
+		});
 		this.gameFrame.add(this.gamePanel, BorderLayout.CENTER);
 	}
 
