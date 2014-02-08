@@ -20,6 +20,19 @@ public class Wall extends SimObject {
 	private Body body;
 	private PolygonShape shape;
 	private Vec2 startPosition;
+	private double angle;
+
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 *
+	 * @param x
+	 * @param y
+	 * @param angle
+	 */
+	public Wall(int x, int y, double angle) {
+		this.startPosition = new Vec2(x,y);
+		this.angle = angle;
+	}
 
 	@Override
 	public void create() {
@@ -28,6 +41,7 @@ public class Wall extends SimObject {
 		BodyDef def = new BodyDef();
 		def.type = BodyType.STATIC;
 		def.position.set(this.startPosition);
+		def.angle = (float) this.angle;
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);

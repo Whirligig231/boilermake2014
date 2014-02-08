@@ -180,6 +180,10 @@ public class GameComponent extends JComponent {
 		SimObject temp = new Wood(x, y,angle);
 		this.visual.add(temp);
 	}
+	public void addWall(int x, int y,double angle) {
+		SimObject temp = new Wall(x, y,angle);
+		this.visual.add(temp);
+	}
 
 	public void addRock(int x, int y,double angle) {
 		SimObject temp = new Rock(x, y,angle);
