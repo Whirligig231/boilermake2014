@@ -15,7 +15,11 @@ public class Gate extends SimObject {
 	private Vec2 position;
 	private float angle;
 	private boolean active;
-
+	
+	public Gate(int x, int y,double startAngle){
+		this.position=new Vec2(x,y);
+		this.angle=(float) startAngle;
+	}
 	@Override
 	public void create() {
 		this.active = false;

@@ -185,6 +185,10 @@ public class GameComponent extends JComponent {
 		SimObject temp = new Rock(x, y,angle);
 		this.visual.add(temp);
 	}
+	public void addGate(int x, int y,double angle) {
+		SimObject temp = new Gate(x, y,angle);
+		this.visual.add(temp);
+	}
 	
 	
 	
