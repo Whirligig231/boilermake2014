@@ -38,6 +38,7 @@ public class GameComponent extends JComponent {
 	private int woodCount;
 	private int rockCount;
 	private int gearCount;
+	private int wallCount;
 	// private int
 	// private int
 	// private int
@@ -198,6 +199,10 @@ public class GameComponent extends JComponent {
 		this.gearCount += bounceCount;
 	}
 
+	public void addToWallCount(int wallCount){
+		this.wallCount += bounceCount;
+	}
+	
 	public void generateButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
@@ -337,6 +342,25 @@ public class GameComponent extends JComponent {
 		gearAdder.addActionListener(gearListn);
 		buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll = new JScrollPane(buttonPanel);
+		// Wall Button
+				JButton wallAdder = new JButton("Wall (" + this.wallCount + ")");
+				class WallButtonListner implements ActionListener {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						if (GameComponent.this.theWorld.isRunning()) return;
+						if (GameComponent.this.wallCount > 0) {
+							GameComponent.this.wallCount--;
+							SimObject temp = new Wall(5, 5, 0);
+							temp.makeMovable(true);
+							GameComponent.this.theWorld.addObject(temp);
+							((JButton)(arg0.getSource())).setText("Wall ("+GameComponent.this.wallCount
+									+")");
+						}
+					}
+				}
+				WallButtonListner wallListn = new WallButtonListner();
+				wallAdder.addActionListener(wallListn);
+				buttonPanel.add(wallAdder);
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
 	}
 }

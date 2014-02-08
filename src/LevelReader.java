@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 
 public class LevelReader {
 
-	private Level level;
 	private File text;
 	private HashMap<String,Integer> types;
 	private GameComponent gameComponent;
@@ -23,16 +22,9 @@ public class LevelReader {
 	private final int ON_SCREEN_STRING_POSITION = 4;
 	private final int OFF_SCREEN_STRING_POSITION = 5;
 	
-	public static void main(String[] args){
-		//to test level reader
-		LevelReader reader = new LevelReader(new File("Levels/level1.txt"));
-	}
-	
 	public LevelReader(File levelFile){
 		this.text = levelFile;
-		this.level = new Level();
 		this.types = new HashMap<String,Integer>();
-		
 		
 		//read the file to make a level
 		try {
@@ -56,13 +48,10 @@ public class LevelReader {
 			while(scanner.hasNext()){
 				String next = scanner.next();
 				this.types.put(next,0);
-				System.out.println(next);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		readOffValues();
 	}
 	
 	private void setup(String[] fileText){
@@ -94,9 +83,6 @@ public class LevelReader {
 		int sizeY = Integer.parseInt(pos[1]);
 		
 		this.gameComponent = new GameComponent(sizeX,sizeY);
-		
-		//TODO remove level stuff
-		this.level.setDimensions(new Dimension(sizeX,sizeY));
 	}
 	
 	private void processTime(String timeString){
@@ -113,9 +99,6 @@ public class LevelReader {
 		int time = Integer.parseInt(numbersInTime.toString());
 		
 		this.gameComponent.setTime(time);
-		
-		//TODO remove level stuff
-		this.level.setTime(time);
 	}
 	
 	private void processStart(String startString){
@@ -129,12 +112,7 @@ public class LevelReader {
 		int startX = Integer.parseInt(pos[0]);
 		int startY = Integer.parseInt(pos[1]);
 		
-		System.out.println(startX + " " + startY);
-		
 		this.gameComponent.addBall(startX, startY);
-		
-		//TODO remove level stuff
-		this.level.setBallPosition(new Point2D.Double(startX,startY));
 	}
 	
 	private void processOnScreen(String onScreenString){
@@ -174,7 +152,10 @@ public class LevelReader {
 			if(type.equals("gate")){
 				this.gameComponent.addGate(xPosition,yPosition,tilt);
 			}
-			
+			if(types.equals("wall")){
+				this.gameComponent.addWall(xPosition, yPosition, tilt);
+			}
+			//TO ADD ANOTHER OBJECT ON-SCREEN, COPY ONE OF THE ABOVE
 		}
 	}
 	
@@ -230,6 +211,10 @@ public class LevelReader {
 			if(type.equals("gear")){
 				this.gameComponent.addToGearCount(Integer.valueOf(objectData.get(1)));
 			}
+			if(type.equals("wall")){
+				this.gameComponent.addToWallCount(Integer.valueOf(objectData.get(1)));
+			}
+			// TO ADD ANOTHER TYPE OF OBJECT OFF-SCREEN, JUST COPY ONE OF THE ABOVE
 		}
 		
 		this.gameComponent.generateButtons();
@@ -247,20 +232,6 @@ public class LevelReader {
 		objectData.add(objectString.substring(start,end));
 		
 		return objectData;
-	}
-
-	
-	private void readOffValues(){
-		
-		int heightWindow = this.level.getDimensions().height;
-		int widthWindow = this.level.getDimensions().width;
-		int time = this.level.getTime();
-		double ballX = this.level.getBallPosition().getX();
-		double ballY = this.level.getBallPosition().getY();
-		
-//		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
-//		System.out.println("\n" + this.types);
-		
 	}
 	
 }
