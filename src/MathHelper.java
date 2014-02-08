@@ -10,11 +10,8 @@ import org.jbox2d.common.Vec2;
 public abstract class MathHelper {
 	
 	public static boolean intersects(Vec2 start1, Vec2 end1, Vec2 start2, Vec2 end2) {
-		Vec2 dir1 = end1.sub(start1);
-		Vec2 dir2 = end2.sub(start2);
-		if (Vec2.cross(dir1,dir2) == 0.0f) return false;
-		return ((isClockwise(start1,start2,end1) ^ isClockwise(start1,start2,end2)) &&
-				(isClockwise(end1,end2,start1) ^ isClockwise(end1,end2,start2)));
+		return ((isClockwise(start1,end1,start2) != isClockwise(start1,end1,end2)) &&
+				(isClockwise(start2,end2,start1) != isClockwise(start2,end2,end1)));
 	}
 	
 	public static boolean isClockwise(Vec2 a, Vec2 b, Vec2 c) {
