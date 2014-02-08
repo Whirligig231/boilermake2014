@@ -44,6 +44,14 @@ public class GameComponent extends JComponent {
 	// private int
 	private JPanel gamePanel;
 
+	/**
+	 * Returns the value of the field called 'gamePanel'.
+	 * @return Returns the gamePanel.
+	 */
+	public JPanel getGamePanel() {
+		return this.gamePanel;
+	}
+
 	public GameComponent(int width, int height) {
 		this.gameFrame = new JFrame("Game");
 		this.gameFrame.setSize(width, height);
