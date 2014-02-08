@@ -42,7 +42,7 @@ public class GameComponent extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (GameComponent.this.bounceCount > 0) {
-					GameComponent.this.bounceCountt--;
+					GameComponent.this.bounceCount--;
 					SimObject temp = new Bounce(5, 5);
 					temp.makeMovable(true);
 					GameComponent.this.visual.add(temp);
