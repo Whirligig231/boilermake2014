@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -40,6 +41,7 @@ public class GameComponent extends JComponent {
 		this.gameFrame.setSize(width,height);
 		this.gameFrame.setVisible(true);
 		JPanel buttonPanel=new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
 		//Objects Buttons
 		//Fan Button
 		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
@@ -138,7 +140,7 @@ public class GameComponent extends JComponent {
 				gearAdder.addActionListener(gearListn);
 				buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
-		this.gameFrame.add(buttonScroll,BorderLayout.EAST);
+		this.gameFrame.add(buttonScroll,BorderLayout.WEST);
 		JPanel gamePanel = new JPanel(){
 			@Override
 				public void paintComponent(Graphics g){
