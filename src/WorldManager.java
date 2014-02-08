@@ -18,9 +18,9 @@ import org.jbox2d.dynamics.World;
 public class WorldManager {
 	
 	// World's gravity
-	private static final Vec2 GRAVITY = new Vec2(0.0f,-10.0f);
+	public static final Vec2 GRAVITY = new Vec2(0.0f,-10.0f);
 	// Physics FPS
-	private static final float PHYSICS_FPS = 50.0f;
+	public static final float PHYSICS_FPS = 50.0f;
 
 	private World physicsWorld;
 	/**
@@ -84,6 +84,7 @@ public class WorldManager {
 	
 	public SimObject getObject(Vec2 point) {
 		for (SimObject obj : this.allObjects.descendingSet()) {
+			if (obj.getBody() == null) continue;
 			Fixture fix = obj.getBody().getFixtureList();
 			if (fix.testPoint(point)) return obj;
 		}

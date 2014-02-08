@@ -12,7 +12,7 @@ import org.jbox2d.dynamics.Body;
  */
 public abstract class SimObject implements Comparable<SimObject> {
 
-	private int depth;
+	private int depth = 0;
 	private WorldManager world;
 	private boolean moveable =false;
 	
