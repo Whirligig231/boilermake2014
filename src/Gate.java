@@ -16,6 +16,13 @@ public class Gate extends SimObject {
 	private float angle;
 	private boolean active;
 	
+	/**
+	 * Returns the value of the field called 'active'.
+	 * @return Returns the active.
+	 */
+	public boolean isActive() {
+		return this.active;
+	}
 	public Gate(int x, int y,double startAngle){
 		this.position=new Vec2(x,y);
 		this.angle=(float) startAngle;
@@ -38,6 +45,7 @@ public class Gate extends SimObject {
 			if (MathHelper.intersects(corner1,corner2,rbPos,rbNewPos)) {
 				System.out.println(corner1+" "+corner2+" "+rbPos+" "+rbNewPos);
 				this.active = true;
+				this.getWorld().checkWin();
 			}
 		}
 	}

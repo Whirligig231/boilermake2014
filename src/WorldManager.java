@@ -275,4 +275,17 @@ public class WorldManager implements Runnable {
 		this.myCanvas.repaint();
 	}
 	
+	public void checkWin() {
+		for (SimObject obj : this.allObjects) {
+			if (!(obj instanceof Gate)) continue;
+			if (!((Gate)obj).isActive()) return;
+		}
+		this.stop();
+		this.onWin();
+	}
+	
+	private void onWin() {
+		// Here you go Garrett
+	}
+	
 }
