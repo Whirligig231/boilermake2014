@@ -81,7 +81,6 @@ public class LevelReader {
 		processStart(startString);
 		processOnScreen(onScreen);
 		processOffScreen(offScreen);
-		
 	}
 
 	private void processSize(String sizeString){
