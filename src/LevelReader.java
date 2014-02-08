@@ -102,7 +102,9 @@ public class LevelReader {
 	}
 	
 	private void processGoals(String goalsString){
-		//
+		
+		
+		
 	}
 	
 	private void processTime(String timeString){
