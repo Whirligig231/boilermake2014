@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.util.TreeSet;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.World;
 
 /**
@@ -72,6 +73,14 @@ public class WorldManager {
 			}
 		}
 	}
+	
+	public SimObject getObject(Vec2 point) {
+		for (SimObject obj : this.allObjects.descendingSet()) {
+			Fixture fix = obj.getBody().getFixtureList();
+			if (fix.testPoint(point)) return obj;
+		}
+		return null;
+	}
 
 	/**
 	 * Returns the value of the field called 'running'.
@@ -87,6 +96,21 @@ public class WorldManager {
 	 */
 	public void setRunning(boolean running) {
 		this.running = running;
+	}
+	
+	public void start() {
+		this.setRunning(true);
+	}
+	
+	public void stop() {
+		this.setRunning(false);
+		this.resetObjectPositions();
+	}
+
+	private void resetObjectPositions() {
+		for (SimObject obj : this.allObjects) {
+			obj.reset();
+		}
 	}
 	
 }
