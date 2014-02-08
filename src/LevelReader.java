@@ -77,6 +77,7 @@ public class LevelReader {
 		processStart(startString);
 		processOnScreen(onScreen);
 		processOffScreen(offScreen);
+		this.gameComponent.createWorld();
 	}
 
 	private void processSize(String sizeString){

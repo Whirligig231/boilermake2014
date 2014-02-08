@@ -35,10 +35,10 @@ public class Bounce extends SimObject {
 	@Override
 	public void create() {
 		this.shape = new CircleShape();
-		this.shape.setRadius(24.0f);
+		this.shape.setRadius(24.0f/128.0f);
 		BodyDef def = new BodyDef();
 		def.type = BodyType.STATIC;
-		def.position.set(this.startPosition);
+		def.position.set(this.startPosition.mul(1.0f/WorldManager.PHYSICS_SCALE));
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);
@@ -58,8 +58,10 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		ImageUtility.drawImage(g,"Graphics/bumper.png",this.getBody().getPosition().x,
-				this.getBody().getPosition().y,this.getBody().getAngle());
+		ImageUtility.drawImage(g,"Graphics/bumper.png",
+				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
+				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
+				this.getBody().getAngle());
 	}
 
 	/* (non-Javadoc)

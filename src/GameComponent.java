@@ -36,6 +36,7 @@ public class GameComponent extends JComponent {
 //	private int
 //	private int
 //	private int
+	private JPanel gamePanel;
 	
 
 	public GameComponent(int width, int height) {
@@ -143,20 +144,25 @@ public class GameComponent extends JComponent {
 				buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
 		this.gameFrame.add(buttonScroll,BorderLayout.WEST);
-		// World creation
-		this.theWorld = new WorldManager();
-		JPanel gamePanel = new JPanel(){
+		this.gamePanel = new JPanel(){
 			@Override
 			public void paintComponent(Graphics g){
 				super.paintComponent(g);
 				g.setColor(new Color(150,200,250));
 				g.fillRect(0,0,1200,800);
-				GameComponent.this.theWorld.performDraw(g);
+				if (GameComponent.this.theWorld != null)
+					GameComponent.this.theWorld.performDraw(g);
 			}
 		
 			
 		};
-		this.gameFrame.add(gamePanel,BorderLayout.CENTER);
+		this.gameFrame.add(this.gamePanel,BorderLayout.CENTER);
+	}
+	
+	public void createWorld() {
+		// World creation
+		this.theWorld = new WorldManager(this.gamePanel, this.visual);
+		System.out.println(this.visual.size()+" objects in the world");
 	}
 	
 	public void setTime(int time){

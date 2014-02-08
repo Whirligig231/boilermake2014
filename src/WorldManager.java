@@ -3,7 +3,10 @@
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+import java.util.Collection;
 import java.util.TreeSet;
+
+import javax.swing.JPanel;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Fixture;
@@ -15,10 +18,12 @@ import org.jbox2d.dynamics.World;
  * @author schulzcc.
  *         Created Feb 7, 2014.
  */
-public class WorldManager {
+public class WorldManager implements Runnable {
 	
 	// World's gravity
-	public static final Vec2 GRAVITY = new Vec2(0.0f,-10.0f);
+	public static final Vec2 GRAVITY = new Vec2(0.0f,10.0f);
+	// Physics scale
+	public static final float PHYSICS_SCALE = 128.0f;
 	// Physics FPS
 	public static final float PHYSICS_FPS = 50.0f;
 
@@ -43,9 +48,17 @@ public class WorldManager {
 
 	private boolean running = true;
 	private float accumulatedPhysTime = 0.0f;
+	private JPanel myCanvas;
 	
-	public WorldManager() {
+	public WorldManager(JPanel myCanvas, Collection<SimObject> objects) {
+		this.myCanvas = myCanvas;
+		this.physicsWorld = new World(GRAVITY);
 		this.allObjects = new TreeSet<SimObject>();
+		System.out.println("SIZE "+objects.size());
+		for (SimObject obj : objects) this.addObject(obj);
+		System.out.println("MY SIZE "+this.allObjects.size());
+		Thread runThread = new Thread(this);
+		runThread.start();
 	}
 	
 	public void addObject(SimObject object) {
@@ -61,11 +74,14 @@ public class WorldManager {
 	private void performStep() {
 		this.physicsWorld.step((float)(1.0/PHYSICS_FPS),6,2);
 		for (SimObject object : this.allObjects) object.step();
+		this.myCanvas.repaint();
 	}
 	
 	public void performDraw(Graphics g) {
 		for (SimObject obj : this.allObjects) {
-			obj.draw(g);
+			if (obj.getBody() != null) {
+				obj.draw(g);
+			}
 		}
 	}
 	
@@ -77,7 +93,12 @@ public class WorldManager {
 			float currentTimeMs = System.nanoTime()/1000000.0f;
 			while (currentTimeMs < endTimeMs) {
 				currentTimeMs = System.nanoTime()/1000000.0f;
-				// Nothing else here ...
+				/*try {
+					Thread.sleep(20);
+				} catch (InterruptedException exception) {
+					// TODO Auto-generated catch-block stub.
+					exception.printStackTrace();
+				}*/
 			}
 		}
 	}
@@ -120,6 +141,11 @@ public class WorldManager {
 		for (SimObject obj : this.allObjects) {
 			obj.reset();
 		}
+	}
+
+	@Override
+	public void run() {
+		this.stepLoop();
 	}
 	
 }
