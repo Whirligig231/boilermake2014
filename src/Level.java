@@ -15,6 +15,7 @@ public class Level {
 	public Level(){
 		this.size = 0;
 		this.time = 0;
+		this.ballPosition = null;
 	}
 	
 	
