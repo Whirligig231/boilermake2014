@@ -1,8 +1,11 @@
 
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferStrategy;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -84,6 +87,13 @@ public class WorldManager implements Runnable {
 		for (SimObject obj : this.allObjects) {
 			if (obj.getBody() != null || obj instanceof Gate) {
 				obj.draw(g);
+				if (obj.isMoveable()) {
+					float x = obj.getBody().getPosition().x*WorldManager.PHYSICS_SCALE;
+					float y = obj.getBody().getPosition().y*WorldManager.PHYSICS_SCALE;
+					Ellipse2D el = new Ellipse2D.Double(x-3.0,y-3.0,7,7);
+					g.setColor(Color.GREEN);
+					((Graphics2D)g).fill(el);
+				}
 			}
 		}
 	}
