@@ -128,7 +128,7 @@ public class WorldManager implements Runnable {
 		for (SimObject obj : this.allObjects) {
 			if (obj.getBody() != null || obj instanceof Gate) {
 				obj.draw(g);
-				if (obj.isMoveable()) {
+				if (obj.isMoveable() && !this.isRunning()) {
 					float x = obj.getBody().getPosition().x*WorldManager.PHYSICS_SCALE;
 					float y = obj.getBody().getPosition().y*WorldManager.PHYSICS_SCALE;
 					Ellipse2D el = new Ellipse2D.Double(x-3.0,y-3.0,7,7);
