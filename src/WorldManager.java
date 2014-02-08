@@ -1,5 +1,8 @@
 
 
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.image.BufferStrategy;
 import java.util.TreeSet;
 
 import org.jbox2d.common.Vec2;
@@ -15,9 +18,22 @@ public class WorldManager {
 	
 	// World's gravity
 	private static final Vec2 GRAVITY = new Vec2(0.0f,-10.0f);
+	// Physics FPS
+	private static final float PHYSICS_FPS = 50.0f;
 
 	private World physicsWorld;
+	/**
+	 * Returns the value of the field called 'physicsWorld'.
+	 * @return Returns the physicsWorld.
+	 */
+	public World getPhysicsWorld() {
+		return this.physicsWorld;
+	}
+
 	private TreeSet<SimObject> allObjects;
+	
+	private boolean running = true;
+	private float accumulatedPhysTime = 0.0f;
 	
 	public WorldManager() {
 		// Will work this out later
@@ -31,6 +47,46 @@ public class WorldManager {
 	
 	public void removeObject(SimObject object) {
 		this.allObjects.remove(object);
+	}
+	
+	private void performStep() {
+		this.physicsWorld.step((float)(1.0/PHYSICS_FPS),6,2);
+		for (SimObject object : this.allObjects) object.step();
+	}
+	
+	public void performDraw(Graphics g) {
+		for (SimObject obj : this.allObjects) {
+			obj.draw(g);
+		}
+	}
+	
+	public void stepLoop() {
+		while (this.running) {
+			float startTimeMs = System.nanoTime()/1000000.0f;
+			float endTimeMs = startTimeMs + 1000.0f/PHYSICS_FPS;
+			this.performStep();
+			float currentTimeMs = System.nanoTime()/1000000.0f;
+			while (currentTimeMs < endTimeMs) {
+				currentTimeMs = System.nanoTime()/1000000.0f;
+				// Nothing else here ...
+			}
+		}
+	}
+
+	/**
+	 * Returns the value of the field called 'running'.
+	 * @return Returns the running.
+	 */
+	public boolean isRunning() {
+		return running;
+	}
+
+	/**
+	 * Sets the field called 'running' to the given value.
+	 * @param running The running to set.
+	 */
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 	
 }

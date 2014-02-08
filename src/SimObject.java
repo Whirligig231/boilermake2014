@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 
 
 /**
@@ -53,5 +55,18 @@ public abstract class SimObject implements Comparable<SimObject> {
 	public void setWorld(WorldManager world) {
 		this.world = world;
 	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public abstract void step();
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param g
+	 */
+	public abstract void draw(Graphics g);
 
 }
