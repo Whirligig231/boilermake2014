@@ -3,6 +3,9 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 
@@ -10,33 +13,55 @@ public class LevelReader {
 
 	private Level level;
 	private File text;
+	private HashMap<String,Integer> types;
+	private GameComponent gameComponent;
 	
 	private final int SIZE_STRING_POSITION = 1;
 	private final int GOALS_STRING_POSITION = 2;
 	private final int TIME_STRING_POSITION = 3;
 	private final int START_STRING_POSITION = 4;
-
+	private final int ON_SCREEN_STRING_POSITION = 5;
+	private final int OFF_SCREEN_STRING_POSITION = 6;
+	
 	public static void main(String[] args){
-		//to test
+		//to test level reader
 		LevelReader reader = new LevelReader(new File("Levels/level1.txt"));
 	}
 	
 	public LevelReader(File levelFile){
 		this.text = levelFile;
 		this.level = new Level();
+		this.types = new HashMap<String,Integer>();
 		
+		//read the file to make a level
 		try {
 			Scanner scanner = new Scanner(text);
 			StringBuilder fileText = new StringBuilder();
 			while(scanner.hasNext()){
 				fileText.append(scanner.next());
 			}
-			
+			scanner.close();
 			setup(fileText.toString().split("<"));
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		//set up the types set
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File("types.txt"));
+			
+			while(scanner.hasNext()){
+				String next = scanner.next();
+				this.types.put(next,0);
+				System.out.println(next);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		readOffValues();
 	}
 	
 	private void setup(String[] fileText){
@@ -45,13 +70,18 @@ public class LevelReader {
 		String goalsString = fileText[GOALS_STRING_POSITION];
 		String timeString = fileText[TIME_STRING_POSITION];
 		String startString = fileText[START_STRING_POSITION];
+		String onScreen = fileText[ON_SCREEN_STRING_POSITION];
+		String offScreen = fileText[OFF_SCREEN_STRING_POSITION];
+		
 		
 		processSize(sizeString);
 		processGoals(goalsString);
 		processTime(timeString);
 		processStart(startString);
+		processOnScreen(onScreen);
+		processOffScreen(offScreen);
 		
-		readOffValues();
+		
 	}
 	
 	private void processSize(String sizeString){
@@ -64,7 +94,6 @@ public class LevelReader {
 		
 		int sizeX = Integer.parseInt(pos[0]);
 		int sizeY = Integer.parseInt(pos[1]);
-		
 		
 		this.level.setDimensions(new Dimension(sizeX,sizeY));
 	}
@@ -103,7 +132,47 @@ public class LevelReader {
 		System.out.println(startX + " " + startY);
 		
 		this.level.setBallPosition(new Point2D.Double(startX,startY));
-	}	
+	}
+	
+	private void processOnScreen(String onScreenString){
+		
+		String[] gameObjects = onScreenString.split("#");
+		
+		//Object data contains four fields: type, xPosition, yPosition, tilt
+		for(int i = 1; i < gameObjects.length; i++){
+			ArrayList<String> objectData = processObject(gameObjects[i]);
+			String type = objectData.get(0);
+			int xPosition = Integer.parseInt(objectData.get(1));
+			int yPosition = Integer.parseInt(objectData.get(2));
+			int tilt = Integer.parseInt(objectData.get(3));
+			
+		}
+		
+	}
+	
+	private ArrayList<String> processObject(String objectString){
+		
+		ArrayList<String> objectData = new ArrayList<String>();
+		
+		objectData.add(objectString.substring(0,objectString.indexOf("[")));
+		
+		int start = objectString.indexOf("[") + 1;
+		int end = objectString.indexOf("]");
+		
+		//should have three fields: x,y,tilt
+		String[] objectFields = objectString.substring(start,end).split(",");
+		
+		String x = String.valueOf(Integer.parseInt(objectFields[0]));
+		String y = String.valueOf(Integer.parseInt(objectFields[1]));
+		String tilt = String.valueOf(Integer.parseInt(objectFields[2]));
+		
+		//add all the fields to the object data
+		objectData.add(x);
+		objectData.add(y);
+		objectData.add(tilt);
+		
+		return objectData;
+	}
 	
 	private void readOffValues(){
 		
@@ -114,6 +183,7 @@ public class LevelReader {
 		double ballY = this.level.getBallPosition().getY();
 		
 		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
+		System.out.println("\n" + this.types);
 	}
 	
 }
