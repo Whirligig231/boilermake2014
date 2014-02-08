@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
 
 /**
  * 
@@ -25,49 +27,40 @@ public class Wood extends SimObject {
 		this.angle=startAngle;
 	}
 	
-	/* (non-Javadoc)
-	 * @see SimObject#create()
-	 */
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-
+		this.shape = new PolygonShape();
+		this.shape.setAsBox(0.75f,0.125f);
+		BodyDef def = new BodyDef();
+		def.type = BodyType.STATIC;
+		def.position.set(this.startPosition.mul(1.0f/WorldManager.PHYSICS_SCALE));
+		def.angle = (float) this.angle;
+		def.allowSleep = true;
+		this.body = this.getWorld().getPhysicsWorld().createBody(def);
+		this.body.createFixture(this.shape,5.0f);
 	}
 
-	/* (non-Javadoc)
-	 * @see SimObject#step()
-	 */
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-
+		// Nothing really needs to be done here
 	}
 
-	/* (non-Javadoc)
-	 * @see SimObject#draw(java.awt.Graphics)
-	 */
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-
+		ImageUtility.drawImage(g,"Graphics/wood.png",
+				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
+				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
+				this.getBody().getAngle());
 	}
 
-	/* (non-Javadoc)
-	 * @see SimObject#getBody()
-	 */
 	@Override
 	public Body getBody() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.body;
 	}
 
-	/* (non-Javadoc)
-	 * @see SimObject#reset()
-	 */
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-
+		// Static doesn't need reset
 	}
 	
 	@Override
@@ -79,5 +72,5 @@ public class Wood extends SimObject {
 	public void setStartAngle(float angle) {
 		this.angle = angle;
 	}
-
+	
 }

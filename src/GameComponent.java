@@ -121,7 +121,6 @@ public class GameComponent extends JComponent {
 	public void createWorld() {
 		// World creation
 		this.theWorld = new WorldManager(this.gamePanel, this.visual);
-		System.out.println(this.visual.size() + " objects in the world");
 	}
 
 	public void setTime(int time) {

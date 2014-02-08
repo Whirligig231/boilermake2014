@@ -50,7 +50,6 @@ public class Rock extends SimObject {
 	
 	@Override
 	public void collideWith(SimObject other) {
-		System.out.println("I AM A ROCK");
 		this.getBody().setLinearDamping(0.0f);
 		this.getBody().setAngularDamping(0.0f);
 	}

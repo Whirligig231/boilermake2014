@@ -62,7 +62,6 @@ public class Gear extends SimObject {
 		def3.localAnchorA.set(0,0);
 		def3.localAnchorB.set(0,0);
 		this.getWorld().getPhysicsWorld().createJoint(def3);
-		System.out.println("MADE THE JOINT");
 	}
 
 	/* (non-Javadoc)

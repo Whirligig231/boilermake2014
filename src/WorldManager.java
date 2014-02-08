@@ -65,9 +65,7 @@ public class WorldManager implements Runnable {
 		this.myCanvas = myCanvas;
 		this.physicsWorld = new World(GRAVITY);
 		this.allObjects = new TreeSet<SimObject>();
-		System.out.println("SIZE "+objects.size());
 		for (SimObject obj : objects) this.addObject(obj);
-		System.out.println("MY SIZE "+this.allObjects.size());
 		this.physicsWorld.setContactListener(new ContactListener() {
 
 			@Override
