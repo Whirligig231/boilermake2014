@@ -1,4 +1,15 @@
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * 
@@ -18,7 +29,32 @@ public class LevelMenu extends JFrame {
 	 * @param text
 	 */
 	public LevelMenu(String text,Options opts) {
-		// TODO Auto-generated constructor stub
+		File[] files  = (new File("./Levels")).listFiles();
+		GridLayout grid = new GridLayout(files.length+1,1, 50, 50);
+		JPanel pane =  new JPanel();
+		pane.setLayout(grid);
+		JLabel label = new JLabel("Levels");
+		label.setFont(new Font("Serif", Font.PLAIN, 40));
+		pane.add(label);
+		for(int i = 1; i<files.length+1; i++){
+			pane.add(new lvlButton(files[i-1].getName()));
+		}
+		this.add(pane);
+		this.setSize(300, 600);
+		this.setVisible(true);
 	}
-
+	private class lvlButton extends JButton{
+		public lvlButton(final String file){
+			this.setText(file);
+			ActionListener start = new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					LevelReader lvl = new LevelReader(new File("./Levels/" + file));
+					// TODO add level thing
+				}
+			};
+			this.addActionListener(start);
+			
+		}
+	}
 }

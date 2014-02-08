@@ -105,7 +105,7 @@ public class MainMenu extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					new LevelMenu(MainMenu.this.nametxt.getText(),MainMenu.this.opts);
-					System.exit(0);
+					
 				}
 			};
 			this.addActionListener(start);
