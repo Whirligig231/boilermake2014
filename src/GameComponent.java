@@ -38,6 +38,7 @@ public class GameComponent extends JComponent {
 	public GameComponent(int width, int height) {
 		this.gameFrame=new JFrame("Game");
 		this.gameFrame.setSize(width,height);
+		this.gameFrame.setVisible(true);
 		JPanel buttonPanel=new JPanel();
 		//Objects Buttons
 		//Fan Button
