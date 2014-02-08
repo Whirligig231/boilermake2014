@@ -45,7 +45,7 @@ public class WorldManager {
 	private float accumulatedPhysTime = 0.0f;
 	
 	public WorldManager() {
-		// Will work this out later
+		this.allObjects = new TreeSet<SimObject>();
 	}
 	
 	public void addObject(SimObject object) {

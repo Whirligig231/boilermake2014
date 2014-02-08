@@ -143,6 +143,8 @@ public class GameComponent extends JComponent {
 				buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
 		this.gameFrame.add(buttonScroll,BorderLayout.WEST);
+		// World creation
+		this.theWorld = new WorldManager();
 		JPanel gamePanel = new JPanel(){
 			@Override
 			public void paintComponent(Graphics g){
