@@ -46,7 +46,7 @@ public class WorldManager implements Runnable {
 		return this.allObjects;
 	}
 
-	private boolean running = true;
+	private boolean running = false;
 	private float accumulatedPhysTime = 0.0f;
 	private JPanel myCanvas;
 	
@@ -57,14 +57,14 @@ public class WorldManager implements Runnable {
 		System.out.println("SIZE "+objects.size());
 		for (SimObject obj : objects) this.addObject(obj);
 		System.out.println("MY SIZE "+this.allObjects.size());
-		Thread runThread = new Thread(this);
-		runThread.start();
 	}
 	
 	public void addObject(SimObject object) {
 		object.setWorld(this);
 		this.allObjects.add(object);
 		object.create();
+		if (this.myCanvas != null)
+			this.myCanvas.repaint();
 	}
 	
 	public void removeObject(SimObject object) {
@@ -130,11 +130,14 @@ public class WorldManager implements Runnable {
 	
 	public void start() {
 		this.setRunning(true);
+		Thread runThread = new Thread(this);
+		runThread.start();
 	}
 	
 	public void stop() {
 		this.setRunning(false);
 		this.resetObjectPositions();
+		this.myCanvas.repaint();
 	}
 
 	private void resetObjectPositions() {
