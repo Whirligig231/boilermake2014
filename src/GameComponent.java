@@ -394,7 +394,8 @@ public class GameComponent extends JComponent {
 		class MakeLevelButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				GameComponent.this.levelBuilder.setGameParts(GameComponent.this.theWorld.getAllObjects());
+				GameComponent.this.levelBuilder.writeToFile();
 			}
 		}
 		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();

@@ -1,6 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class LevelBuilder extends JFrame{
@@ -17,7 +23,6 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.createWorld();
 		this.gameParts = new ArrayList<SimObject>();
 		this.setUpButtons();
-		
 	}
 	public void setUpButtons(){
 		
@@ -31,8 +36,54 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.makeLevelButton();
 		
 	}
-
+	public void setGameParts(TreeSet<SimObject> objectsDrawn){
+		for (SimObject s:objectsDrawn){
+			gameParts.add(s);
+		}
+	}
 	
+	public void writeToFile(){
+		
+		JOptionPane namePrompt = new JOptionPane();
+		
+		String fileName = namePrompt.showInputDialog("What would you like to name your level?");
+		
+		//actually create a new file under the level builder's files
+		try{
+			FileOutputStream stream = new FileOutputStream("./LevelBuilderFiles/" + fileName + ".txt");
+			stream.close();
+			}
+			catch(FileNotFoundException e){
+				System.out.println("file not found");
+			}
+			catch(IOException e){
+				System.out.println("io exception");
+			}
+		
+		ArrayList<SimObject> specialParts = new ArrayList<SimObject>();
+		int xPos = 100;
+		int yPos = 100;
+		double tilt = 100;
+		
+		
+		
+		for (int i=0;i<this.gameParts.size()-1;i++){
+			if(this.gameParts.get(i).isSpecial()){
+				specialParts.add(this.gameParts.get(i));
+			}else{
+				xPos =(int) this.gameParts.get(i).getBody().getPosition().x;
+				yPos =(int) this.gameParts.get(i).getBody().getPosition().y;
+				tilt = this.gameParts.get(i).getBody().getAngle();
+			}
+		}
+		
+		
+		
+		
+		
+	
+
+	}
 	
 	
 }
