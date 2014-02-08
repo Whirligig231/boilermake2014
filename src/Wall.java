@@ -54,8 +54,10 @@ public class Wall extends SimObject {
 
 	@Override
 	public void draw(Graphics g) {
-		ImageUtility.drawImage(g,"Graphics/wall.png",this.getBody().getPosition().x,
-				this.getBody().getPosition().y,this.getBody().getAngle());
+		ImageUtility.drawImage(g,"Graphics/wall.png",
+				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
+				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
+				this.getBody().getAngle());
 	}
 
 	@Override
