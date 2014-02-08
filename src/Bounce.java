@@ -35,7 +35,7 @@ public class Bounce extends SimObject {
 	@Override
 	public void create() {
 		this.shape = new CircleShape();
-		this.shape.setRadius(24.0f/128.0f);
+		this.shape.setRadius(0.1875f);
 		BodyDef def = new BodyDef();
 		def.type = BodyType.STATIC;
 		def.position.set(this.startPosition.mul(1.0f/WorldManager.PHYSICS_SCALE));

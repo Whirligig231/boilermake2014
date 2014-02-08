@@ -47,6 +47,7 @@ public class Wood extends SimObject {
 
 	@Override
 	public void draw(Graphics g) {
+		if (!this.body.isActive()) return;
 		ImageUtility.drawImage(g,"Graphics/wood.png",
 				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
 				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
@@ -60,7 +61,9 @@ public class Wood extends SimObject {
 
 	@Override
 	public void reset() {
-		// Static doesn't need reset
+		this.body.setTransform(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE),
+				(float) this.angle);
+		this.body.setActive(true);
 	}
 	
 	@Override

@@ -31,7 +31,7 @@ public class RedBall extends SimObject {
 		BodyDef def = new BodyDef();
 		def.type = BodyType.DYNAMIC;
 		def.position.set(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE));
-		def.allowSleep = true;
+		def.allowSleep = false;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);
 		this.body.getFixtureList().setRestitution(0.5f);
