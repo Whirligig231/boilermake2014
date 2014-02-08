@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 
+import org.jbox2d.dynamics.Body;
+
 /**
  * 
  */
@@ -40,6 +42,22 @@ public class Fan extends SimObject {
 	 */
 	@Override
 	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see SimObject#getBody()
+	 */
+	@Override
+	public Body getBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/* (non-Javadoc)
+	 * @see SimObject#reset()
+	 */
+	@Override
+	public void reset() {
 		// TODO Auto-generated method stub
 		
 	}
