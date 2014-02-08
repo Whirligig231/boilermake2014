@@ -48,6 +48,7 @@ public class Torch extends SimObject {
 	public void collideWith(SimObject other) {
 		if (other instanceof Wood) {
 			other.getBody().setActive(false);
+			other.setDepth(100);
 		}
 	}
 

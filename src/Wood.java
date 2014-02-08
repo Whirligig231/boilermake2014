@@ -47,8 +47,10 @@ public class Wood extends SimObject {
 
 	@Override
 	public void draw(Graphics g) {
-		if (!this.body.isActive()) return;
-		ImageUtility.drawImage(g,"Graphics/wood.png",
+		String imageName;
+		if (!this.body.isActive()) imageName = "Graphics/char.png";
+		else imageName = "Graphics/wood.png";
+		ImageUtility.drawImage(g,imageName,
 				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
 				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
 				this.getBody().getAngle());
@@ -64,6 +66,7 @@ public class Wood extends SimObject {
 		this.body.setActive(true);
 		this.body.setTransform(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE),
 				(float) this.angle);
+		this.setDepth(0);
 	}
 	
 	@Override
