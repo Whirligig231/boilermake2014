@@ -34,6 +34,7 @@ public class RedBall extends SimObject {
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);
+		this.body.getFixtureList().setRestitution(0.5f);
 	}
 
 	@Override

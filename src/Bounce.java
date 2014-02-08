@@ -42,7 +42,7 @@ public class Bounce extends SimObject {
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);
-		this.body.getFixtureList().setRestitution(1.5f);
+		this.body.getFixtureList().setRestitution(1.0f);
 	}
 
 	/* (non-Javadoc)
