@@ -16,7 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-/**
+/**a
  * TODO Put here a description of what this class does.
  * 
  * @author Steven. Created Feb 8, 2014.
