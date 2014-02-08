@@ -90,6 +90,10 @@ public abstract class SimObject implements Comparable<SimObject> {
 	 * @return
 	 */
 	public abstract Body getBody();
+	
+	public Body getAuxBody() {
+		return null;
+	}
 
 	/**
 	 * TODO Put here a description of what this method does.
