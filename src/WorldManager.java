@@ -79,7 +79,7 @@ public class WorldManager implements Runnable {
 	
 	public void performDraw(Graphics g) {
 		for (SimObject obj : this.allObjects) {
-			if (obj.getBody() != null) {
+			if (obj.getBody() != null || obj instanceof Gate) {
 				obj.draw(g);
 			}
 		}
