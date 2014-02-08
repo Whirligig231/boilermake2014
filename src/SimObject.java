@@ -32,6 +32,14 @@ public abstract class SimObject implements Comparable<SimObject> {
 	}
 
 	/**
+	 * Returns the value of the field called 'moveable'.
+	 * @return Returns the moveable.
+	 */
+	public boolean isMoveable() {
+		return this.moveable;
+	}
+
+	/**
 	 * Returns the value of the field called 'depth'.
 	 * @return Returns the depth.
 	 */

@@ -2,6 +2,7 @@
 
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -26,6 +27,8 @@ public class WorldManager implements Runnable {
 	public static final float PHYSICS_SCALE = 128.0f;
 	// Physics FPS
 	public static final float PHYSICS_FPS = 50.0f;
+	
+	private SimObject holding = null;
 
 	private World physicsWorld;
 	/**
@@ -107,7 +110,7 @@ public class WorldManager implements Runnable {
 		for (SimObject obj : this.allObjects.descendingSet()) {
 			if (obj.getBody() == null) continue;
 			Fixture fix = obj.getBody().getFixtureList();
-			if (fix.testPoint(point)) return obj;
+			if (fix.testPoint(point.mul(1.0f/WorldManager.PHYSICS_SCALE))) return obj;
 		}
 		return null;
 	}
@@ -149,6 +152,70 @@ public class WorldManager implements Runnable {
 	@Override
 	public void run() {
 		this.stepLoop();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param wheelRotation
+	 */
+	public void handleWheel(int x, int y, int wheelRotation) {
+		SimObject moving = this.getObject(new Vec2(x,y));
+		if (moving == null) return;
+		if (!moving.isMoveable()) return;
+		moving.getBody().setTransform(moving.getBody().getPosition(),
+				(float) (moving.getBody().getAngle()+wheelRotation*Math.PI/20.0f));
+		this.myCanvas.repaint();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param x
+	 * @param y
+	 * @param button
+	 */
+	public void handleDrag(int x, int y, int button) {
+		if (this.running) return;
+		if (this.holding == null) return;
+		this.holding.getBody().setTransform(new Vec2(x,y).mul(
+				1.0f/WorldManager.PHYSICS_SCALE),this.holding.getBody().getAngle());
+		this.myCanvas.repaint();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param x
+	 * @param y
+	 * @param button
+	 */
+	public void handleRelease(int x, int y, int button) {
+		if (this.running) return;
+		this.holding = null;
+		this.myCanvas.repaint();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param x
+	 * @param y
+	 * @param button
+	 */
+	public void handlePress(int x, int y, int button) {
+		if (this.running) return;
+		if (this.holding == null) this.holding = this.getObject(new Vec2(x,y));
+		if (this.holding == null) return;
+		if (!this.holding.isMoveable()) {
+			this.holding = null;
+			return;
+		}
+		if (button == MouseEvent.BUTTON3) {
+			this.removeObject(this.holding);
+			this.holding = null;
+		}
+		this.myCanvas.repaint();
 	}
 	
 }
