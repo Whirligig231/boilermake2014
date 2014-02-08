@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -14,11 +15,16 @@ import org.jbox2d.dynamics.Body;
  *         Created Feb 8, 2014.
  */
 public class Wood extends SimObject {
+	private PolygonShape shape;
+	private Body body;
 	private Vec2 startPosition;
+	private double angle;
 	
-	public Wood(int x, int y){
+	public Wood(int x, int y,double startAngle){
 		this.startPosition=new Vec2(x,y);
+		this.angle=startAngle;
 	}
+	
 	/* (non-Javadoc)
 	 * @see SimObject#create()
 	 */

@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -14,6 +15,8 @@ import org.jbox2d.dynamics.Body;
  *         Created Feb 8, 2014.
  */
 public class Gear extends SimObject {
+	private PolygonShape shape;
+	private Body body;
 	private Vec2 startPosition;
 	private double angle;
 	

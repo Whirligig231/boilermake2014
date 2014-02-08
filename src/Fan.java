@@ -19,17 +19,16 @@ import org.jbox2d.dynamics.World;
  *         Created Feb 8, 2014.
  */
 public class Fan extends SimObject {
-	private int xcorrd;
-	private int ycorrd;
 	private PolygonShape shape;
 	private Body body;
 	private Vec2 startPosition;
-
+	private double angle;
 	
-	public Fan(int x,int y){
-		this.xcorrd=x;
-		this.ycorrd=y;
+	public Fan(int x, int y,double startAngle){
+		this.startPosition=new Vec2(x,y);
+		this.angle=startAngle;
 	}
+	
 	/* (non-Javadoc)
 	 * @see SimObject#create()
 	 */
