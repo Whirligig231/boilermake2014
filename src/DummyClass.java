@@ -16,7 +16,8 @@ public class DummyClass {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub.
-		JOptionPane.showMessageDialog(null,"Burn in hell infidile");
+		JOptionPane.showMessageDialog(null,"Shane was here (disclaimer: previous versions of this code "
+				+ "do not reflect the accurate opinion of Christian Schulz regarding LGBT persons)");
 	}
 
 }
