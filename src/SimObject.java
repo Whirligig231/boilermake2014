@@ -12,7 +12,7 @@ public abstract class SimObject implements Comparable<SimObject> {
 
 	private int depth;
 	private WorldManager world;
-	boolean moveable =false;
+	private boolean moveable =false;
 	
 	public abstract void create();
 	
