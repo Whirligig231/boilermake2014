@@ -30,12 +30,13 @@ public class Gate extends SimObject {
 		// Check for the ball ...
 		for (SimObject obj : this.getWorld().getAllObjects()) {
 			if (!(obj instanceof RedBall)) continue;
-			Vec2 rbPos = obj.getBody().getPosition();
-			Vec2 rbVel = obj.getBody().getLinearVelocity();
+			Vec2 rbPos = obj.getBody().getPosition().mul(WorldManager.PHYSICS_SCALE);
+			Vec2 rbVel = obj.getBody().getLinearVelocity().mul(WorldManager.PHYSICS_SCALE);
 			Vec2 rbNewPos = rbPos.add(rbVel.mul(1.0f/WorldManager.PHYSICS_FPS));
 			Vec2 corner1 = this.position.add(MathHelper.polar(128.0f,this.angle));
 			Vec2 corner2 = this.position.add(MathHelper.polar(-128.0f,this.angle));
 			if (MathHelper.intersects(corner1,corner2,rbPos,rbNewPos)) {
+				System.out.println(corner1+" "+corner2+" "+rbPos+" "+rbNewPos);
 				this.active = true;
 			}
 		}
