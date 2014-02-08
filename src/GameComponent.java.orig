@@ -1,0 +1,45 @@
+<<<<<<< HEAD
+/**
+ * 
+ */
+//package src;
+
+=======
+>>>>>>> bcfeccc9a01be1c1e62938c793a52718660e059a
+import java.util.ArrayList;
+
+import javax.swing.JComponent;
+
+/**
+ * TODO Put here a description of what this class does.
+ *
+ * @author Steven.
+ *         Created Feb 8, 2014.
+ */
+public class GameComponent extends JComponent {
+	ArrayList<SimObject> visual=new ArrayList<SimObject>();
+	private int fanCount;
+	private int bounceCount;
+	
+	
+	public GameComponent(){
+		}
+	
+	public void addFan(int x,int y){
+		SimObject temp=new Fan(x,y);
+		this.visual.add(temp);
+	}
+	public void addBounce(int x,int y){
+		SimObject temp=new Bounce(x,y);
+		this.visual.add(temp);
+		}
+	public void addToFanCount(int fanIncrease){
+		this.fanCount+=fanIncrease;
+	}
+	public void addToBounceCount(int bounceCount){
+		this.bounceCount+=bounceCount;
+	}
+	//buttons
+	
+	
+}

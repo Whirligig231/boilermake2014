@@ -1,3 +1,7 @@
+import java.awt.Graphics;
+
+import org.jbox2d.dynamics.Body;
+
 
 
 /**
@@ -10,11 +14,15 @@ public abstract class SimObject implements Comparable<SimObject> {
 
 	private int depth;
 	private WorldManager world;
-
+	private boolean moveable =false;
+	
 	public abstract void create();
 	
 	public void destroy() {
 		this.getWorld().removeObject(this);
+	}
+	public void makeMovable(boolean a){
+		this.moveable=a;
 	}
 	
 	@Override
@@ -53,5 +61,25 @@ public abstract class SimObject implements Comparable<SimObject> {
 	public void setWorld(WorldManager world) {
 		this.world = world;
 	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public abstract void step();
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param g
+	 */
+	public abstract void draw(Graphics g);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public abstract Body getBody();
 
 }
