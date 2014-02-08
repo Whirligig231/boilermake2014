@@ -82,4 +82,10 @@ public abstract class SimObject implements Comparable<SimObject> {
 	 */
 	public abstract Body getBody();
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public abstract void reset();
+
 }

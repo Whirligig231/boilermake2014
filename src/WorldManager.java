@@ -98,4 +98,19 @@ public class WorldManager {
 		this.running = running;
 	}
 	
+	public void start() {
+		this.setRunning(true);
+	}
+	
+	public void stop() {
+		this.setRunning(false);
+		this.resetObjectPositions();
+	}
+
+	private void resetObjectPositions() {
+		for (SimObject obj : this.allObjects) {
+			obj.reset();
+		}
+	}
+	
 }
