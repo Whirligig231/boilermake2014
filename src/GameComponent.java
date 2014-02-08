@@ -144,7 +144,7 @@ public class GameComponent extends JComponent {
 	}
 
 	public void addGear(int x, int y, double angle) {
-		SimObject temp = new Fan(x, y, angle);
+		SimObject temp = new Gear(x, y, angle);
 		this.visual.add(temp);
 	}
 
