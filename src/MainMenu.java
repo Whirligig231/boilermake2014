@@ -147,7 +147,7 @@ public class MainMenu extends JFrame {
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new LevelBuilder();
+					new LevelBuilder(new GameComponent(1200,800));
 					
 				}
 			};

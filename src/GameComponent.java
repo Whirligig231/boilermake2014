@@ -39,6 +39,7 @@ public class GameComponent extends JComponent {
 	private int rockCount;
 	private int gearCount;
 	private int wallCount;
+	private int totalCount;
 	// private int
 	// private int
 	// private int
@@ -184,30 +185,40 @@ public class GameComponent extends JComponent {
 	// Object counters (off Screen)
 	public void addToFanCount(int fanIncrease) {
 		this.fanCount += fanIncrease;
+		this.totalCount+=fanIncrease;
 	}
 
 	public void addToBounceCount(int bounceCount) {
 		this.bounceCount += bounceCount;
+		this.totalCount+=bounceCount;
 	}
 
-	public void addToTorchCount(int bounceCount) {
-		this.torchCount += bounceCount;
+	public void addToTorchCount(int torchCount) {
+		this.torchCount += torchCount;
+		this.totalCount+=torchCount;
 	}
 
 	public void addToWoodCount(int bounceCount) {
 		this.woodCount += bounceCount;
+		this.totalCount+=bounceCount;
 	}
 
 	public void addToRockCount(int bounceCount) {
 		this.rockCount += bounceCount;
+		this.totalCount+=bounceCount;
 	}
 
 	public void addToGearCount(int bounceCount) {
 		this.gearCount += bounceCount;
+		this.totalCount+=bounceCount;
 	}
 
 	public void addToWallCount(int wallCount){
-		this.wallCount += bounceCount;
+		this.wallCount += wallCount;
+		this.totalCount+=wallCount;
+	}
+	public int totalExObj(){
+		return this.totalCount;
 	}
 	
 	public void generateButtons() {
@@ -371,8 +382,8 @@ public class GameComponent extends JComponent {
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
 	}
 	public void makeLevelButton(){
-		this.visual.get(0).isMoveable();
-		JButton makeLevel = new JButton("Generate Level)");
+//		this.visual.get(0).isMoveable();
+		JButton makeLevel = new JButton("Generate Level");
 		class MakeLevelButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
