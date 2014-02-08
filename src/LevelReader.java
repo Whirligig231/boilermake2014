@@ -152,7 +152,7 @@ public class LevelReader {
 			if(type.equals("gate")){
 				this.gameComponent.addGate(xPosition,yPosition,tilt);
 			}
-			if(types.equals("wall")){
+			if(type.equals("wall")){
 				this.gameComponent.addWall(xPosition, yPosition, tilt);
 			}
 			//TO ADD ANOTHER OBJECT ON-SCREEN, COPY ONE OF THE ABOVE
