@@ -216,6 +216,9 @@ public class WorldManager implements Runnable {
 		if (!moving.isMoveable()) return;
 		moving.getBody().setTransform(moving.getBody().getPosition(),
 				(float) (moving.getBody().getAngle()+wheelRotation*Math.PI/20.0f));
+		if (moving.getAuxBody() != null) 
+			moving.getAuxBody().setTransform(moving.getAuxBody().getPosition(),
+					(float) (moving.getAuxBody().getAngle()+wheelRotation*Math.PI/20.0f));
 		this.myCanvas.repaint();
 	}
 
@@ -231,6 +234,9 @@ public class WorldManager implements Runnable {
 		if (this.holding == null) return;
 		this.holding.getBody().setTransform(new Vec2(x,y).mul(
 				1.0f/WorldManager.PHYSICS_SCALE),this.holding.getBody().getAngle());
+		if (this.holding.getAuxBody() != null)
+			this.holding.getAuxBody().setTransform(new Vec2(x,y).mul(
+					1.0f/WorldManager.PHYSICS_SCALE),this.holding.getAuxBody().getAngle());
 		this.holding.setStartAngle(this.holding.getBody().getAngle());
 		this.myCanvas.repaint();
 	}
