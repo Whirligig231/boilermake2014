@@ -33,6 +33,14 @@ public class WorldManager {
 
 	private TreeSet<SimObject> allObjects;
 	
+	/**
+	 * Returns the value of the field called 'allObjects'.
+	 * @return Returns the allObjects.
+	 */
+	public TreeSet<SimObject> getAllObjects() {
+		return this.allObjects;
+	}
+
 	private boolean running = true;
 	private float accumulatedPhysTime = 0.0f;
 	

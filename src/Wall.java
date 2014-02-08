@@ -35,7 +35,7 @@ public class Wall extends SimObject {
 
 	@Override
 	public void step() {
-		// Nothing really needs to be done here ... yet. *evil laugh*
+		// Nothing really needs to be done here
 	}
 
 	@Override
