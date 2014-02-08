@@ -1,6 +1,11 @@
 import java.awt.Graphics;
 
+import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.Shape;
+import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
 
 /**
  * 
@@ -15,6 +20,9 @@ import org.jbox2d.dynamics.Body;
 public class Bounce extends SimObject {
 	private int xcorrd;
 	private int ycorrd;
+	private Shape shape;
+	private Vec2 startPosition;
+	private Body body;
 	
 	public Bounce(int x,int y){
 		this.xcorrd=x;
@@ -26,8 +34,15 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-
+		this.shape = new CircleShape();
+		this.shape.setRadius(24.0f);
+		BodyDef def = new BodyDef();
+		def.type = BodyType.STATIC;
+		def.position.set(this.startPosition);
+		def.allowSleep = true;
+		this.body = this.getWorld().getPhysicsWorld().createBody(def);
+		this.body.createFixture(this.shape,5.0f);
+		this.body.getFixtureList().setRestitution(1.5f);
 	}
 
 	/* (non-Javadoc)
@@ -35,8 +50,7 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-		
+		// Nothing to do here
 	}
 
 	/* (non-Javadoc)
@@ -44,8 +58,8 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		ImageUtility.drawImage(g,"Graphics/bumper.png",this.getBody().getPosition().x,
+				this.getBody().getPosition().y,this.getBody().getAngle());
 	}
 
 	/* (non-Javadoc)
@@ -53,8 +67,7 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public Body getBody() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.body;
 	}
 
 	/* (non-Javadoc)
@@ -62,8 +75,7 @@ public class Bounce extends SimObject {
 	 */
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		// Not necessary for static stuff
 	}
 
 }
