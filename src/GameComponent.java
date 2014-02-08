@@ -17,11 +17,17 @@ import javax.swing.JComponent;
  */
 public class GameComponent extends JComponent {
 	ArrayList<SimObject> visual = new ArrayList<SimObject>();
+	final private int frameWidth;
+	final private int frameHeight;
+	private int time;
 	private int fanCount;
 	private int bounceCount;
+	
 
-	public GameComponent() {
+	public GameComponent(int width, int height) {
 		// Fan Button
+		this.frameHeight=height;
+		this.frameWidth=width;
 		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
 		class FanButtonListner implements ActionListener {
 			@Override
@@ -52,12 +58,18 @@ public class GameComponent extends JComponent {
 		FanButtonListner BounceListn= new FanButtonListner();
 		BouncerAdder.addActionListener(BounceListn);
 	}
+	public void setTime(int time){
+		this.time=time; 
+	}
 
 	public void addFan(int x, int y) {
 		SimObject temp = new Fan(x, y);
 		this.visual.add(temp);
 	}
-
+	public void addBall(int x,int y){
+		SimObject temp = new RedBall(x, y);
+		this.visual.add(temp);
+	}
 	public void addBounce(int x, int y) {
 		SimObject temp = new Bounce(x, y);
 		this.visual.add(temp);

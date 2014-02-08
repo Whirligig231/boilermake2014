@@ -19,6 +19,10 @@ public class RedBall extends SimObject {
 	private Body body;
 	private Shape shape;
 	private Vec2 startPosition;
+	
+	public RedBall(int x, int y){
+		this.startPosition=new Vec2(x,y);
+	}
 
 	@Override
 	public void create() {
