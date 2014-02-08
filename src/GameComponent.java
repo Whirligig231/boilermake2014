@@ -362,4 +362,16 @@ public class GameComponent extends JComponent {
 				buttonPanel.add(wallAdder);
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
 	}
+	public void makeLevelButton(){
+		JButton makeLevel = new JButton("Generate Level)");
+		class MakeLevelButtonListner implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//to be coded
+			}
+		}
+		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();
+		makeLevel.addActionListener(makeLevelListen);
+		this.gameFrame.add(makeLevel,BorderLayout.SOUTH);
+	}
 }
