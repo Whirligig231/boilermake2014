@@ -1,7 +1,6 @@
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-
 public class Level {
 
 	private int size;
@@ -16,6 +15,41 @@ public class Level {
 		this.size = 0;
 		this.time = 0;
 		this.ballPosition = null;
+		this.goals = new ArrayList<Goal>();
+		this.onScreenObjects = new ArrayList<GameObject>();
+		this.offScreenObjects = new ArrayList<GameObject>();
+	}
+	
+	public void setSize(int size){
+		this.size = size;
+	}
+	
+	public int getSize(){
+		return this.size;
+	}
+	
+	public void setTime(int time){
+		this.time = time;
+	}
+	
+	public int getTime(){
+		return this.time;
+	}
+	
+	public void setBallPosition(Point2D ballPosition){
+		this.ballPosition = ballPosition;
+	}
+	
+	public void addGoal(Goal nextGoal){
+		this.goals.add(nextGoal);
+	}
+	
+	public void addOnScreenObject(GameObject nextOnScreenObject){
+		this.onScreenObjects.add(nextOnScreenObject);
+	}
+	
+	public void addOffScreenObject(GameObject nextOffScreenObject){
+		this.offScreenObjects.add(nextOffScreenObject);
 	}
 	
 	

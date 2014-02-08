@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
 
+import org.jbox2d.common.Vec2;
 
 /**
  * TODO Put here a description of what this class does.
@@ -15,9 +16,9 @@ public class DummyClass {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub.
-		JOptionPane.showMessageDialog(null,"Shane was here (disclaimer: previous versions of this code "
-				+ "do not reflect the accurate opinion of Christian Schulz regarding LGBT persons)");
+		Vec2 a = new Vec2(4,5);
+		Vec2 b = new Vec2(7,1);
+		System.out.println("Dot product is "+Vec2.dot(a,b));
 	}
 
 }
