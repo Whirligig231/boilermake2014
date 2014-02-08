@@ -8,16 +8,16 @@ public class Level {
 	private Point2D ballPosition;
 	
 	private ArrayList<Goal> goals;
-	private ArrayList<GameObject> onScreenObjects;
-	private ArrayList<GameObject> offScreenObjects;
+	private ArrayList<SimObject> onScreenObjects;
+	private ArrayList<SimObject> offScreenObjects;
 	
 	public Level(){
 		this.size = 0;
 		this.time = 0;
 		this.ballPosition = null;
 		this.goals = new ArrayList<Goal>();
-		this.onScreenObjects = new ArrayList<GameObject>();
-		this.offScreenObjects = new ArrayList<GameObject>();
+		this.onScreenObjects = new ArrayList<SimObject>();
+		this.offScreenObjects = new ArrayList<SimObject>();
 	}
 	
 	public void setSize(int size){
@@ -44,11 +44,11 @@ public class Level {
 		this.goals.add(nextGoal);
 	}
 	
-	public void addOnScreenObject(GameObject nextOnScreenObject){
+	public void addOnScreenObject(SimObject nextOnScreenObject){
 		this.onScreenObjects.add(nextOnScreenObject);
 	}
 	
-	public void addOffScreenObject(GameObject nextOffScreenObject){
+	public void addOffScreenObject(SimObject nextOffScreenObject){
 		this.offScreenObjects.add(nextOffScreenObject);
 	}
 	
