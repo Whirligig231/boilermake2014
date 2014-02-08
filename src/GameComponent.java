@@ -5,6 +5,7 @@
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 /**
@@ -32,11 +33,15 @@ public class GameComponent extends JComponent {
 		}
 	public void addToFanCount(int fanIncrease){
 		this.fanCount+=fanIncrease;
+//		SimObject temp=new Fan(5,5);
+//		temp.makeMovable(true);
+//		this.visual.add(temp);
 	}
 	public void addToBounceCount(int bounceCount){
 		this.bounceCount+=bounceCount;
 	}
 	//buttons
+	JButton fanAdder;
 	
 	
 }
