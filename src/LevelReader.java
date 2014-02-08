@@ -68,7 +68,6 @@ public class LevelReader {
 		
 		//size must be processed first for making GameComponent
 		String sizeString = fileText[SIZE_STRING_POSITION];
-		String goalsString = fileText[GOALS_STRING_POSITION];
 		String timeString = fileText[TIME_STRING_POSITION];
 		String startString = fileText[START_STRING_POSITION];
 		String onScreen = fileText[ON_SCREEN_STRING_POSITION];
@@ -76,7 +75,6 @@ public class LevelReader {
 		
 		
 		processSize(sizeString);
-		processGoals(goalsString);
 		processTime(timeString);
 		processStart(startString);
 		processOnScreen(onScreen);
@@ -98,12 +96,6 @@ public class LevelReader {
 		
 		//TODO remove level stuff
 		this.level.setDimensions(new Dimension(sizeX,sizeY));
-	}
-	
-	private void processGoals(String goalsString){
-		
-		
-		
 	}
 	
 	private void processTime(String timeString){
@@ -163,10 +155,10 @@ public class LevelReader {
 			if(type.equals("bounce")){
 				this.gameComponent.addBounce(xPosition, yPosition,tilt);
 			}
-			
-			
+			if(type.equals("gate")){
+				this.gameComponent.addGate(xPosition,yPosition,tilt);
+			}
 		}
-		
 	}
 	
 	private ArrayList<String> processOnScreenObject(String objectString){
