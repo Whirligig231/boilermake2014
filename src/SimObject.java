@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 
+import org.jbox2d.dynamics.Body;
+
 
 
 /**
@@ -72,5 +74,12 @@ public abstract class SimObject implements Comparable<SimObject> {
 	 * @param g
 	 */
 	public abstract void draw(Graphics g);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public abstract Body getBody();
 
 }

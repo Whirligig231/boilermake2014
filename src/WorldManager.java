@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.util.TreeSet;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.World;
 
 /**
@@ -71,6 +72,14 @@ public class WorldManager {
 				// Nothing else here ...
 			}
 		}
+	}
+	
+	public SimObject getObject(Vec2 point) {
+		for (SimObject obj : this.allObjects.descendingSet()) {
+			Fixture fix = obj.getBody().getFixtureList();
+			if (fix.testPoint(point)) return obj;
+		}
+		return null;
 	}
 
 	/**
