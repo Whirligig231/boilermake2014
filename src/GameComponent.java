@@ -40,6 +40,7 @@ public class GameComponent extends JComponent {
 	private int gearCount;
 	private int wallCount;
 	private int totalCount;
+	private LevelBuilder levelBuilder;
 	// private int
 	// private int
 	// private int
@@ -126,6 +127,12 @@ public class GameComponent extends JComponent {
 		});
 		this.gameFrame.add(this.gamePanel, BorderLayout.CENTER);
 	}
+	public GameComponent(int x, int y,LevelBuilder levelBuilder){
+		this(x,y);
+		this.levelBuilder=levelBuilder;		
+	}
+	
+	
 
 	public void createWorld() {
 		// World creation
@@ -387,7 +394,7 @@ public class GameComponent extends JComponent {
 		class MakeLevelButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//to be coded
+				
 			}
 		}
 		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();
