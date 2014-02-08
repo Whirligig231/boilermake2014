@@ -53,7 +53,7 @@ public class MainMenu extends JFrame {
 		menuPanel.add(labelPane,BorderLayout.NORTH);
 		buttonPanel.add("start",new startButton());
 		buttonPanel.add("instr",new instrButton());
-		buttonPanel.add("options",new JButton());
+		buttonPanel.add("Level edit",new lvlButton());
 		buttonPanel.add("exit", new exitButton());
 		menuPanel.add(name,BorderLayout.CENTER);
 		
@@ -140,5 +140,19 @@ public class MainMenu extends JFrame {
 			this.addActionListener(start);
 		}
 	}	
-
+	private class lvlButton extends JButton{
+		public lvlButton(){
+			super();
+			this.setText("Level Editor");
+			ActionListener start = new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					new LevelBuilder();
+					
+				}
+			};
+			this.addActionListener(start);
+		}
+		
+	}
 }
