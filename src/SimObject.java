@@ -12,11 +12,15 @@ public abstract class SimObject implements Comparable<SimObject> {
 
 	private int depth;
 	private WorldManager world;
-
+	boolean moveable =false;
+	
 	public abstract void create();
 	
 	public void destroy() {
 		this.getWorld().removeObject(this);
+	}
+	public void makeMovable(boolean a){
+		this.moveable=a;
 	}
 	
 	@Override

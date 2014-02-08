@@ -16,6 +16,7 @@ public class Bounce extends SimObject {
 		this.xcorrd=x;
 		this.ycorrd=y;
 	}
+	
 	/* (non-Javadoc)
 	 * @see SimObject#create()
 	 */

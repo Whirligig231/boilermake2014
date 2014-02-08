@@ -11,6 +11,7 @@
 public class Fan extends SimObject {
 	private int xcorrd;
 	private int ycorrd;
+
 	
 	public Fan(int x,int y){
 		this.xcorrd=x;

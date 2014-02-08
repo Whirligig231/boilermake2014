@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src;
+//package src;
 
 import java.util.ArrayList;
 
@@ -36,5 +36,7 @@ public class GameComponent extends JComponent {
 	public void addToBounceCount(int bounceCount){
 		this.bounceCount+=bounceCount;
 	}
+	//buttons
+	
 	
 }
