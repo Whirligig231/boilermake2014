@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 
 public class LevelReader {
 
@@ -242,8 +244,8 @@ public class LevelReader {
 		double ballX = this.level.getBallPosition().getX();
 		double ballY = this.level.getBallPosition().getY();
 		
-		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
-		System.out.println("\n" + this.types);
+//		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
+//		System.out.println("\n" + this.types);
 		
 	}
 	

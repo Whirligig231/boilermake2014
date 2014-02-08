@@ -149,7 +149,7 @@ public class GameComponent extends JComponent {
 				super.paintComponent(g);
 				g.setColor(new Color(150,200,250));
 				g.fillRect(0,0,1200,800);
-				GameComponent.this.theWorld.performDraw(g);
+//				GameComponent.this.theWorld.performDraw(g);
 			}
 		
 			
