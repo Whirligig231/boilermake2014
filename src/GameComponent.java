@@ -4,6 +4,7 @@
 //package src;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
  */
 public class GameComponent extends JComponent {
 	ArrayList<SimObject> visual = new ArrayList<SimObject>();
+	private WorldManager theWorld;
 	private JFrame gameFrame;
 	private int time;
 	//off screen object counters
@@ -143,15 +145,18 @@ public class GameComponent extends JComponent {
 		this.gameFrame.add(buttonScroll,BorderLayout.WEST);
 		JPanel gamePanel = new JPanel(){
 			@Override
-				public void paintComponent(Graphics g){
+			public void paintComponent(Graphics g){
 				super.paintComponent(g);
-				g.fillRect(10,10,10,10);
+				g.setColor(new Color(150,200,250));
+				g.fillRect(0,0,1200,800);
+				GameComponent.this.theWorld.performDraw(g);
 			}
 		
 			
 		};
 		this.gameFrame.add(gamePanel,BorderLayout.CENTER);
-			}
+	}
+	
 	public void setTime(int time){
 		this.time=time; 
 	}
