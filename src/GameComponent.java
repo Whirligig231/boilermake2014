@@ -44,6 +44,14 @@ public class GameComponent extends JComponent {
 	// private int
 	private JPanel gamePanel;
 
+	/**
+	 * Returns the value of the field called 'gamePanel'.
+	 * @return Returns the gamePanel.
+	 */
+	public JPanel getGamePanel() {
+		return this.gamePanel;
+	}
+
 	public GameComponent(int width, int height) {
 		this.gameFrame = new JFrame("Game");
 		this.gameFrame.setSize(width, height);
@@ -361,5 +369,17 @@ public class GameComponent extends JComponent {
 				wallAdder.addActionListener(wallListn);
 				buttonPanel.add(wallAdder);
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
+	}
+	public void makeLevelButton(){
+		JButton makeLevel = new JButton("Generate Level)");
+		class MakeLevelButtonListner implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//to be coded
+			}
+		}
+		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();
+		makeLevel.addActionListener(makeLevelListen);
+		this.gameFrame.add(makeLevel,BorderLayout.SOUTH);
 	}
 }

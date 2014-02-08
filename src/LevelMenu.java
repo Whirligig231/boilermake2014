@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * 
@@ -39,7 +40,9 @@ public class LevelMenu extends JFrame {
 		for(int i = 1; i<files.length+1; i++){
 			pane.add(new lvlButton(files[i-1].getName()));
 		}
-		this.add(pane);
+		JScrollPane pain = new JScrollPane(pane);
+		
+		this.add(pain);
 		this.setSize(300, 600);
 		this.setVisible(true);
 	}
