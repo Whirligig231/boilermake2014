@@ -4,6 +4,7 @@
 //package src;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -137,7 +138,17 @@ public class GameComponent extends JComponent {
 				buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
 		this.gameFrame.add(buttonScroll,BorderLayout.EAST);
-	}
+		JPanel gamePanel = new JPanel(){
+			@Override
+				public void paintComponent(Graphics g){
+				super.paintComponent(g);
+				g.fillRect(10,10,10,10);
+			}
+		
+			
+		};
+		this.gameFrame.add(gamePanel,BorderLayout.CENTER);
+			}
 	public void setTime(int time){
 		this.time=time; 
 	}
