@@ -37,6 +37,10 @@ public class Level {
 		this.ballPosition = ballPosition;
 	}
 	
+	public Point2D getBallPosition(){
+		return this.ballPosition;
+	}
+	
 //	public void addGoal(Goal nextGoal){
 //		this.goals.add(nextGoal);
 //	}

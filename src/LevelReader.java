@@ -11,11 +11,16 @@ public class LevelReader {
 	private Level level;
 	private File text;
 	
-	private final int SIZE_STRING_POSITION = 0;
-	private final int GOALS_STRING_POSITION = 1;
-	private final int TIME_STRING_POSITION = 2;
-	private final int START_STRING_POSITION = 3;
-		
+	private final int SIZE_STRING_POSITION = 1;
+	private final int GOALS_STRING_POSITION = 2;
+	private final int TIME_STRING_POSITION = 3;
+	private final int START_STRING_POSITION = 4;
+
+	public static void main(String[] args){
+		//to test
+		LevelReader reader = new LevelReader(new File("Levels/level1.txt"));
+	}
+	
 	public LevelReader(File levelFile){
 		this.text = levelFile;
 		this.level = new Level();
@@ -26,6 +31,7 @@ public class LevelReader {
 			while(scanner.hasNext()){
 				fileText.append(scanner.next());
 			}
+			
 			setup(fileText.toString().split("<"));
 			
 		} catch (FileNotFoundException e) {
@@ -34,7 +40,7 @@ public class LevelReader {
 	}
 	
 	private void setup(String[] fileText){
-		
+
 		String sizeString = fileText[SIZE_STRING_POSITION];
 		String goalsString = fileText[GOALS_STRING_POSITION];
 		String timeString = fileText[TIME_STRING_POSITION];
@@ -44,11 +50,13 @@ public class LevelReader {
 		processGoals(goalsString);
 		processTime(timeString);
 		processStart(startString);
+		
+		readOffValues();
 	}
 	
 	private void processSize(String sizeString){
 		
-		int startIndex = sizeString.indexOf(" ") + 1;
+		int startIndex = sizeString.indexOf("[") + 1;
 		int endIndex = sizeString.indexOf(">") - 1;
 		
 		//separates into x and y
@@ -56,6 +64,7 @@ public class LevelReader {
 		
 		int sizeX = Integer.parseInt(pos[0]);
 		int sizeY = Integer.parseInt(pos[1]);
+		
 		
 		this.level.setDimensions(new Dimension(sizeX,sizeY));
 	}
@@ -66,10 +75,16 @@ public class LevelReader {
 	
 	private void processTime(String timeString){
 		
-		int startIndex = timeString.indexOf(" ") + 1;
-		int endIndex = timeString.indexOf(">");
+		StringBuilder numbersInTime = new StringBuilder();
 		
-		int time = Integer.parseInt(timeString.substring(startIndex,endIndex));
+		for(int i = 0; i < timeString.length(); i++){
+			if(!Character.isDigit(timeString.charAt(i))){
+				continue;
+			}
+			numbersInTime.append(timeString.charAt(i));
+		}
+		
+		int time = Integer.parseInt(numbersInTime.toString());
 		
 		this.level.setTime(time);
 	}
@@ -85,9 +100,20 @@ public class LevelReader {
 		int startX = Integer.parseInt(pos[0]);
 		int startY = Integer.parseInt(pos[1]);
 		
+		System.out.println(startX + " " + startY);
+		
 		this.level.setBallPosition(new Point2D.Double(startX,startY));
+	}	
+	
+	private void readOffValues(){
+		
+		int heightWindow = this.level.getDimensions().height;
+		int widthWindow = this.level.getDimensions().width;
+		int time = this.level.getTime();
+		double ballX = this.level.getBallPosition().getX();
+		double ballY = this.level.getBallPosition().getY();
+		
+		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
 	}
-	
-	
 	
 }
