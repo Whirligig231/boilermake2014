@@ -149,7 +149,7 @@ public class LevelReader {
 		
 		//Object data contains four fields: type, xPosition, yPosition, tilt
 		for(int i = 1; i < gameObjects.length; i++){
-			ArrayList<String> objectData = processObject(gameObjects[i]);
+			ArrayList<String> objectData = processOnScreenObject(gameObjects[i]);
 			String type = objectData.get(0);
 			int xPosition = Integer.parseInt(objectData.get(1));
 			int yPosition = Integer.parseInt(objectData.get(2));
@@ -161,11 +161,13 @@ public class LevelReader {
 			if(type.equals("bounce")){
 				this.gameComponent.addBounce(xPosition, yPosition,tilt);
 			}
+			
+			
 		}
 		
 	}
 	
-	private ArrayList<String> processObject(String objectString){
+	private ArrayList<String> processOnScreenObject(String objectString){
 		
 		ArrayList<String> objectData = new ArrayList<String>();
 		
@@ -189,6 +191,40 @@ public class LevelReader {
 		return objectData;
 	}
 	
+	private void processOffScreen(String offScreenString){
+		
+		String[] gameObjects = offScreenString.split("#");
+		
+		//Object data contains two fields: type, number of the object
+		for(int i = 1; i < gameObjects.length; i++){
+			ArrayList<String> objectData = processOffScreenObject(gameObjects[i]);
+			String type = objectData.get(0);
+			
+			if(type.equals("fan")){
+				this.gameComponent.addToFanCount(Integer.valueOf(objectData.get(1)));
+			}
+			if(type.equals("bounce")){
+				this.gameComponent.addToBounceCount(Integer.valueOf(objectData.get(1)));
+			}
+		}
+		
+	}
+	
+	private ArrayList<String> processOffScreenObject(String objectString){
+		
+		ArrayList<String> objectData = new ArrayList<String>();
+		
+		objectData.add(objectString.substring(0,objectString.indexOf("[")));
+		
+		int start = objectString.indexOf("[") + 1;
+		int end = objectString.indexOf("]");
+		
+		objectData.add(objectString.substring(start,end));
+		
+		return objectData;
+	}
+
+	
 	private void readOffValues(){
 		
 		int heightWindow = this.level.getDimensions().height;
@@ -199,6 +235,9 @@ public class LevelReader {
 		
 		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
 		System.out.println("\n" + this.types);
+		
+
+		
 	}
 	
 }
