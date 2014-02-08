@@ -1,6 +1,5 @@
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public class LevelReader {
 		this.text = levelFile;
 		this.level = new Level();
 		this.types = new HashMap<String,Integer>();
+		
 		
 		//read the file to make a level
 		try {
@@ -65,7 +65,8 @@ public class LevelReader {
 	}
 	
 	private void setup(String[] fileText){
-
+		
+		//size must be processed first for making GameComponent
 		String sizeString = fileText[SIZE_STRING_POSITION];
 		String goalsString = fileText[GOALS_STRING_POSITION];
 		String timeString = fileText[TIME_STRING_POSITION];
@@ -81,9 +82,8 @@ public class LevelReader {
 		processOnScreen(onScreen);
 		processOffScreen(offScreen);
 		
-		
 	}
-	
+
 	private void processSize(String sizeString){
 		
 		int startIndex = sizeString.indexOf("[") + 1;
@@ -95,6 +95,9 @@ public class LevelReader {
 		int sizeX = Integer.parseInt(pos[0]);
 		int sizeY = Integer.parseInt(pos[1]);
 		
+		this.gameComponent = new GameComponent(sizeX,sizeY);
+		
+		//TODO remove level stuff
 		this.level.setDimensions(new Dimension(sizeX,sizeY));
 	}
 	
@@ -115,6 +118,9 @@ public class LevelReader {
 		
 		int time = Integer.parseInt(numbersInTime.toString());
 		
+		this.gameComponent.setTime(time);
+		
+		//TODO remove level stuff
 		this.level.setTime(time);
 	}
 	
@@ -131,6 +137,9 @@ public class LevelReader {
 		
 		System.out.println(startX + " " + startY);
 		
+		this.gameComponent.addBall(startX, startY);
+		
+		//TODO remove level stuff
 		this.level.setBallPosition(new Point2D.Double(startX,startY));
 	}
 	
@@ -144,8 +153,14 @@ public class LevelReader {
 			String type = objectData.get(0);
 			int xPosition = Integer.parseInt(objectData.get(1));
 			int yPosition = Integer.parseInt(objectData.get(2));
-			int tilt = Integer.parseInt(objectData.get(3));
+			double tilt = Double.parseDouble(objectData.get(3));
 			
+			if(type.equals("fan")){
+				this.gameComponent.addFan(xPosition, yPosition,tilt);
+			}
+			if(type.equals("bounce")){
+				this.gameComponent.addBounce(xPosition, yPosition,tilt);
+			}
 		}
 		
 	}
@@ -164,7 +179,7 @@ public class LevelReader {
 		
 		String x = String.valueOf(Integer.parseInt(objectFields[0]));
 		String y = String.valueOf(Integer.parseInt(objectFields[1]));
-		String tilt = String.valueOf(Integer.parseInt(objectFields[2]));
+		String tilt = String.valueOf(Double.parseDouble(objectFields[2]));
 		
 		//add all the fields to the object data
 		objectData.add(x);
