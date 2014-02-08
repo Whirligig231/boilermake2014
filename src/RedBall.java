@@ -57,7 +57,7 @@ public class RedBall extends SimObject {
 
 	@Override
 	public void reset() {
-		this.body.setTransform(this.startPosition,0.0f);
+		this.body.setTransform(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE),0.0f);
 		this.body.setLinearVelocity(new Vec2());
 		this.body.setAngularVelocity(0.0f);
 	}

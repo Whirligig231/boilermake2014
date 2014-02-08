@@ -145,7 +145,16 @@ public class GameComponent extends JComponent {
 		class StartButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//put code here
+				JButton b = (JButton)arg0.getSource();
+				WorldManager world = GameComponent.this.theWorld;
+				if (world.isRunning()) {
+					world.stop();
+					b.setText("Start");
+				}
+				else {
+					world.start();
+					b.setText("Stop");
+				}
 			}
 		}
 		StartButtonListner startListn = new StartButtonListner();
@@ -158,11 +167,14 @@ public class GameComponent extends JComponent {
 			int fans=GameComponent.this.fanCount;
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (this.fans > 0) {
-					this.fans--;
+				if (GameComponent.this.theWorld.isRunning()) return;
+				if (GameComponent.this.fanCount > 0) {
+					GameComponent.this.fanCount--;
 					SimObject temp = new Fan(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Fan ("+GameComponent.this.fanCount
+							+")");
 				}
 			}
 		}
@@ -174,11 +186,14 @@ public class GameComponent extends JComponent {
 		class BouncerButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.bounceCount > 0) {
 					GameComponent.this.bounceCount--;
 					SimObject temp = new Bounce(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Bouncer ("+
+					GameComponent.this.bounceCount+")");
 				}
 			}
 		}
@@ -190,11 +205,14 @@ public class GameComponent extends JComponent {
 		class TorchButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.torchCount > 0) {
 					GameComponent.this.torchCount--;
 					SimObject temp = new Torch(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Fan ("+GameComponent.this.torchCount
+							+")");
 				}
 			}
 		}
@@ -206,11 +224,14 @@ public class GameComponent extends JComponent {
 		class WoodButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.woodCount > 0) {
 					GameComponent.this.woodCount--;
 					SimObject temp = new Wood(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Wood ("+GameComponent.this.woodCount
+							+")");
 				}
 			}
 		}
@@ -222,11 +243,14 @@ public class GameComponent extends JComponent {
 		class RockButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.rockCount > 0) {
 					GameComponent.this.rockCount--;
 					SimObject temp = new Rock(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Rock ("+GameComponent.this.rockCount
+							+")");
 				}
 			}
 		}
@@ -238,12 +262,14 @@ public class GameComponent extends JComponent {
 		class GearButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(GameComponent.this.gearCount);
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.gearCount > 0) {
 					GameComponent.this.gearCount--;
 					SimObject temp = new Gear(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Gear ("+GameComponent.this.gearCount
+							+")");
 				}
 			}
 		}

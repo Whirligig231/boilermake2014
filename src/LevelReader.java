@@ -218,6 +218,18 @@ public class LevelReader {
 			if(type.equals("bounce")){
 				this.gameComponent.addToBounceCount(Integer.valueOf(objectData.get(1)));
 			}
+			if(type.equals("torch")){
+				this.gameComponent.addToTorchCount(Integer.valueOf(objectData.get(1)));
+			}
+			if(type.equals("wood")){
+				this.gameComponent.addToWoodCount(Integer.valueOf(objectData.get(1)));
+			}
+			if(type.equals("rock")){
+				this.gameComponent.addToRockCount(Integer.valueOf(objectData.get(1)));
+			}
+			if(type.equals("gear")){
+				this.gameComponent.addToGearCount(Integer.valueOf(objectData.get(1)));
+			}
 		}
 		
 		this.gameComponent.generateButtons();
