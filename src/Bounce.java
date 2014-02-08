@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 
 import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -18,15 +19,14 @@ import org.jbox2d.dynamics.BodyType;
  *         Created Feb 8, 2014.
  */
 public class Bounce extends SimObject {
-	private int xcorrd;
-	private int ycorrd;
-	private Shape shape;
-	private Vec2 startPosition;
+	private CircleShape shape;
 	private Body body;
+	private Vec2 startPosition;
+	private double angle;
 	
-	public Bounce(int x,int y){
-		this.xcorrd=x;
-		this.ycorrd=y;
+	public Bounce(int x, int y,double startAngle){
+		this.startPosition=new Vec2(x,y);
+		this.angle=startAngle;
 	}
 	
 	/* (non-Javadoc)

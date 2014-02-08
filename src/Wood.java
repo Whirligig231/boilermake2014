@@ -1,12 +1,8 @@
 import java.awt.Graphics;
-import java.util.Set;
 
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.World;
 
 /**
  * 
@@ -18,13 +14,13 @@ import org.jbox2d.dynamics.World;
  * @author Steven.
  *         Created Feb 8, 2014.
  */
-public class Fan extends SimObject {
+public class Wood extends SimObject {
 	private PolygonShape shape;
 	private Body body;
 	private Vec2 startPosition;
 	private double angle;
 	
-	public Fan(int x, int y,double startAngle){
+	public Wood(int x, int y,double startAngle){
 		this.startPosition=new Vec2(x,y);
 		this.angle=startAngle;
 	}
@@ -34,43 +30,44 @@ public class Fan extends SimObject {
 	 */
 	@Override
 	public void create() {
-		this.shape = new PolygonShape();
-		this.shape.setAsBox(64,16);
-		BodyDef def = new BodyDef();
-		def.type = BodyType.STATIC;
-		def.position.set(this.startPosition);
-		def.allowSleep = true;
-		this.body = this.getWorld().getPhysicsWorld().createBody(def);
-		this.body.createFixture(this.shape,5.0f);
+		// TODO Auto-generated method stub
+
 	}
+
 	/* (non-Javadoc)
 	 * @see SimObject#step()
 	 */
 	@Override
 	public void step() {
-		// TODO Make it blow!
+		// TODO Auto-generated method stub
+
 	}
+
 	/* (non-Javadoc)
 	 * @see SimObject#draw(java.awt.Graphics)
 	 */
 	@Override
 	public void draw(Graphics g) {
-		ImageUtility.drawImage(g,"Graphics/fan.png",this.getBody().getPosition().x,
-				this.getBody().getPosition().y,this.getBody().getAngle());
+		// TODO Auto-generated method stub
+
 	}
+
 	/* (non-Javadoc)
 	 * @see SimObject#getBody()
 	 */
 	@Override
 	public Body getBody() {
-		return this.body;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 	/* (non-Javadoc)
 	 * @see SimObject#reset()
 	 */
 	@Override
 	public void reset() {
-		// Nada.
+		// TODO Auto-generated method stub
+
 	}
 
 }
