@@ -17,8 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-/*
- * TODO Put here a description of what this class does.
+/* * TODO Put here a description of what this class does.
  * 
  * @author Steven. Created Feb 8, 2014.
  */
@@ -142,33 +141,59 @@ public class GameComponent extends JComponent {
 	public void generateButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-		// Objects Buttons
-		// Fan Button
-		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
-		class FanButtonListner implements ActionListener {
+		JButton start = new JButton("Start");
+		class StartButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				JButton b = (JButton)arg0.getSource();
+				WorldManager world = GameComponent.this.theWorld;
+				if (world.isRunning()) {
+					world.stop();
+					b.setText("Start");
+				}
+				else {
+					world.start();
+					b.setText("Stop");
+				}
+			}
+		}
+		StartButtonListner startListn = new StartButtonListner();
+		start.addActionListener(startListn);
+		buttonPanel.add(start);
+		// Objects Buttons
+		// Fan Button
+		JButton fanAdder = new JButton("Fan (" + this.fanCount + ")");
+		class FanButtonListner implements ActionListener {
+			int fans=GameComponent.this.fanCount;
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.fanCount > 0) {
 					GameComponent.this.fanCount--;
 					SimObject temp = new Fan(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Fan ("+GameComponent.this.fanCount
+							+")");
 				}
 			}
 		}
-		FanButtonListner FanListn = new FanButtonListner();
-		FanAdder.addActionListener(FanListn);
-		buttonPanel.add(FanAdder);
+		FanButtonListner fanListn = new FanButtonListner();
+		fanAdder.addActionListener(fanListn);
+		buttonPanel.add(fanAdder);
 		// Bouncer Button
 		JButton BouncerAdder = new JButton("Bouncer (" + this.bounceCount + ")");
 		class BouncerButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.bounceCount > 0) {
 					GameComponent.this.bounceCount--;
 					SimObject temp = new Bounce(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Bouncer ("+
+					GameComponent.this.bounceCount+")");
 				}
 			}
 		}
@@ -180,11 +205,14 @@ public class GameComponent extends JComponent {
 		class TorchButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.torchCount > 0) {
 					GameComponent.this.torchCount--;
 					SimObject temp = new Torch(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Fan ("+GameComponent.this.torchCount
+							+")");
 				}
 			}
 		}
@@ -196,11 +224,14 @@ public class GameComponent extends JComponent {
 		class WoodButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.woodCount > 0) {
 					GameComponent.this.woodCount--;
 					SimObject temp = new Wood(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Wood ("+GameComponent.this.woodCount
+							+")");
 				}
 			}
 		}
@@ -212,11 +243,14 @@ public class GameComponent extends JComponent {
 		class RockButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.rockCount > 0) {
 					GameComponent.this.rockCount--;
 					SimObject temp = new Rock(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Rock ("+GameComponent.this.rockCount
+							+")");
 				}
 			}
 		}
@@ -228,12 +262,14 @@ public class GameComponent extends JComponent {
 		class GearButtonListner implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(GameComponent.this.gearCount);
+				if (GameComponent.this.theWorld.isRunning()) return;
 				if (GameComponent.this.gearCount > 0) {
 					GameComponent.this.gearCount--;
 					SimObject temp = new Gear(5, 5, 0);
 					temp.makeMovable(true);
-					GameComponent.this.visual.add(temp);
+					GameComponent.this.theWorld.addObject(temp);
+					((JButton)(arg0.getSource())).setText("Gear ("+GameComponent.this.gearCount
+							+")");
 				}
 			}
 		}
