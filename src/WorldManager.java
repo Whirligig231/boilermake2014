@@ -12,9 +12,14 @@ import java.util.TreeSet;
 
 import javax.swing.JPanel;
 
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.collision.Manifold;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.contacts.Contact;
 
 /**
  * TODO Put here a description of what this class does.
@@ -63,6 +68,41 @@ public class WorldManager implements Runnable {
 		System.out.println("SIZE "+objects.size());
 		for (SimObject obj : objects) this.addObject(obj);
 		System.out.println("MY SIZE "+this.allObjects.size());
+		this.physicsWorld.setContactListener(new ContactListener() {
+
+			@Override
+			public void beginContact(Contact arg0) {
+				Body b1 = arg0.getFixtureA().getBody();
+				Body b2 = arg0.getFixtureB().getBody();
+				SimObject o1 = null, o2 = null;
+				for (SimObject obj : WorldManager.this.allObjects) {
+					if (obj.getBody() == null) continue;
+					if (obj.getBody().equals(b1)) o1 = obj;
+					if (obj.getBody().equals(b2)) o2 = obj;
+				}
+				o1.collideWith(o2);
+				o2.collideWith(o1);
+			}
+
+			@Override
+			public void endContact(Contact arg0) {
+				// nope
+				
+			}
+
+			@Override
+			public void postSolve(Contact arg0, ContactImpulse arg1) {
+				// no
+				
+			}
+
+			@Override
+			public void preSolve(Contact arg0, Manifold arg1) {
+				// definitely not
+				
+			}
+			
+		});
 	}
 	
 	public void addObject(SimObject object) {
@@ -74,6 +114,7 @@ public class WorldManager implements Runnable {
 	}
 	
 	public void removeObject(SimObject object) {
+		this.physicsWorld.destroyBody(object.getBody());
 		this.allObjects.remove(object);
 	}
 	
@@ -87,7 +128,7 @@ public class WorldManager implements Runnable {
 		for (SimObject obj : this.allObjects) {
 			if (obj.getBody() != null || obj instanceof Gate) {
 				obj.draw(g);
-				if (obj.isMoveable()) {
+				if (obj.isMoveable() && !this.isRunning()) {
 					float x = obj.getBody().getPosition().x*WorldManager.PHYSICS_SCALE;
 					float y = obj.getBody().getPosition().y*WorldManager.PHYSICS_SCALE;
 					Ellipse2D el = new Ellipse2D.Double(x-3.0,y-3.0,7,7);
@@ -190,6 +231,7 @@ public class WorldManager implements Runnable {
 		if (this.holding == null) return;
 		this.holding.getBody().setTransform(new Vec2(x,y).mul(
 				1.0f/WorldManager.PHYSICS_SCALE),this.holding.getBody().getAngle());
+		this.holding.setStartAngle(this.holding.getBody().getAngle());
 		this.myCanvas.repaint();
 	}
 
@@ -202,6 +244,7 @@ public class WorldManager implements Runnable {
 	 */
 	public void handleRelease(int x, int y, int button) {
 		if (this.running) return;
+		if (this.holding != null) this.holding.setStartPosition(x,y);
 		this.holding = null;
 		this.myCanvas.repaint();
 	}

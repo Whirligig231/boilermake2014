@@ -60,5 +60,15 @@ public class Gate extends SimObject {
 	public void reset() {
 		this.active = false;
 	}
+	
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.position = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		this.angle = angle;
+	}
 
 }

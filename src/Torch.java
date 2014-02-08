@@ -68,5 +68,15 @@ public class Torch extends SimObject {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.startPosition = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		this.angle = angle;
+	}
 
 }

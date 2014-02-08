@@ -97,4 +97,23 @@ public abstract class SimObject implements Comparable<SimObject> {
 	 */
 	public abstract void reset();
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param x
+	 * @param y
+	 */
+	public abstract void setStartPosition(int x, int y);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param angle
+	 */
+	public abstract void setStartAngle(float angle);
+	
+	public void collideWith(SimObject other) {
+		// Default behavior: nothing
+	}
+
 }

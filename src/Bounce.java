@@ -80,4 +80,14 @@ public class Bounce extends SimObject {
 		// Not necessary for static stuff
 	}
 
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.startPosition = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		this.angle = angle;
+	}
+
 }
