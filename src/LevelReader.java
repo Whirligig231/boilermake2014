@@ -220,6 +220,7 @@ public class LevelReader {
 			}
 		}
 		
+		this.gameComponent.generateButtons();
 	}
 	
 	private ArrayList<String> processOffScreenObject(String objectString){
