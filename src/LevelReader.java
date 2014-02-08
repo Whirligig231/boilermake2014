@@ -16,11 +16,10 @@ public class LevelReader {
 	private GameComponent gameComponent;
 	
 	private final int SIZE_STRING_POSITION = 1;
-	private final int GOALS_STRING_POSITION = 2;
-	private final int TIME_STRING_POSITION = 3;
-	private final int START_STRING_POSITION = 4;
-	private final int ON_SCREEN_STRING_POSITION = 5;
-	private final int OFF_SCREEN_STRING_POSITION = 6;
+	private final int TIME_STRING_POSITION = 2;
+	private final int START_STRING_POSITION = 3;
+	private final int ON_SCREEN_STRING_POSITION = 4;
+	private final int OFF_SCREEN_STRING_POSITION = 5;
 	
 	public static void main(String[] args){
 		//to test level reader
@@ -72,7 +71,6 @@ public class LevelReader {
 		String startString = fileText[START_STRING_POSITION];
 		String onScreen = fileText[ON_SCREEN_STRING_POSITION];
 		String offScreen = fileText[OFF_SCREEN_STRING_POSITION];
-		
 		
 		processSize(sizeString);
 		processTime(timeString);
@@ -149,8 +147,23 @@ public class LevelReader {
 			int yPosition = Integer.parseInt(objectData.get(2));
 			double tilt = Double.parseDouble(objectData.get(3));
 			
+			if(type.equals("ball")){
+				this.gameComponent.addBall(xPosition, yPosition);
+			}
 			if(type.equals("fan")){
 				this.gameComponent.addFan(xPosition, yPosition,tilt);
+			}
+			if(type.equals("torch")){
+				this.gameComponent.addTorch(xPosition, yPosition, tilt);
+			}
+			if(type.equals("wood")){
+				this.gameComponent.addWood(xPosition, yPosition, tilt);
+			}
+			if(type.equals("rock")){
+				this.gameComponent.addRock(xPosition, yPosition, tilt);
+			}
+			if(type.equals("gear")){
+				this.gameComponent.addGear(xPosition, yPosition, tilt);
 			}
 			if(type.equals("bounce")){
 				this.gameComponent.addBounce(xPosition, yPosition,tilt);
@@ -158,6 +171,7 @@ public class LevelReader {
 			if(type.equals("gate")){
 				this.gameComponent.addGate(xPosition,yPosition,tilt);
 			}
+			
 		}
 	}
 	
@@ -230,8 +244,6 @@ public class LevelReader {
 		
 		System.out.printf("Window Width: %d\nWindow Height: %d\nTime: %d\nBallX: %f\nBallY: %f", widthWindow,heightWindow,time,ballX,ballY);
 		System.out.println("\n" + this.types);
-		
-
 		
 	}
 	
