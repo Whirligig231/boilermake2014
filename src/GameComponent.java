@@ -22,6 +22,7 @@ public class GameComponent extends JComponent {
 	ArrayList<SimObject> visual = new ArrayList<SimObject>();
 	final private int frameWidth;
 	final private int frameHeight;
+	private JFrame gameFrame;
 	private int time;
 	private int fanCount;
 	private int bounceCount;
@@ -31,8 +32,8 @@ public class GameComponent extends JComponent {
 		// Fan Button
 		this.frameHeight=height;
 		this.frameWidth=width;
-		JFrame gameFrame=new JFrame("Game");
-		gameFrame.setSize(this.frameWidth,this.frameHeight);
+		this.gameFrame=new JFrame("Game");
+		this.gameFrame.setSize(this.frameWidth,this.frameHeight);
 		JPanel buttonPanel=new JPanel();
 		JButton FanAdder = new JButton("Fan (" + this.fanCount + ")");
 		class FanButtonListner implements ActionListener {
@@ -66,7 +67,7 @@ public class GameComponent extends JComponent {
 		BouncerAdder.addActionListener(BounceListn);
 		buttonPanel.add(BouncerAdder);
 		JScrollPane buttonScroll =new JScrollPane(buttonPanel);
-		gameFrame.add(buttonScroll,BorderLayout.EAST);
+		this.gameFrame.add(buttonScroll,BorderLayout.EAST);
 	}
 	public void setTime(int time){
 		this.time=time; 
