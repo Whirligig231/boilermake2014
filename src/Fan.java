@@ -62,8 +62,6 @@ public class Fan extends SimObject {
 		final Vec2 rayDirection = MathHelper.polar(1.0f,
 				(float) (this.getBody().getAngle()-Math.PI/2.0f));
 		Vec2 thisPosition = leftPosition;
-		System.out.println(leftPosition);
-		System.out.println(rightPosition);
 		for (int i=0;i<=numberOfCasts;i++) {
 			this.getWorld().getPhysicsWorld().raycast(new RayCastCallback() {
 
@@ -101,6 +99,16 @@ public class Fan extends SimObject {
 	@Override
 	public void reset() {
 		// Nada.
+	}
+	
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.startPosition = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		this.angle = angle;
 	}
 
 }

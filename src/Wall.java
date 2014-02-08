@@ -69,5 +69,15 @@ public class Wall extends SimObject {
 	public void reset() {
 		// Static doesn't need reset
 	}
+	
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.startPosition = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		this.angle = angle;
+	}
 
 }

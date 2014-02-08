@@ -61,5 +61,15 @@ public class RedBall extends SimObject {
 		this.body.setLinearVelocity(new Vec2());
 		this.body.setAngularVelocity(0.0f);
 	}
+	
+	@Override
+	public void setStartPosition(int x, int y) {
+		this.startPosition = new Vec2(x,y);
+	}
+
+	@Override
+	public void setStartAngle(float angle) {
+		// Not necessary
+	}
 
 }
