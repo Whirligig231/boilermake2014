@@ -1,11 +1,13 @@
 import java.awt.Graphics;
 import java.util.Set;
 
+import org.jbox2d.callbacks.RayCastCallback;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.World;
 
 /**
@@ -49,7 +51,32 @@ public class Fan extends SimObject {
 	 */
 	@Override
 	public void step() {
-		// TODO Make it blow!
+		// Do the raycasts
+		final float totalForce = 25.0f;
+		final int numberOfCasts = 10;
+		Vec2 leftPosition = this.body.getPosition().add(MathHelper.polar(0.25f,
+				(float) this.getBody().getAngle()));
+		Vec2 rightPosition = this.body.getPosition().add(MathHelper.polar(0.25f,
+				(float) (this.getBody().getAngle()+Math.PI)));
+		Vec2 increment = rightPosition.sub(leftPosition).mul(1.0f/numberOfCasts);
+		final Vec2 rayDirection = MathHelper.polar(1.0f,
+				(float) (this.getBody().getAngle()-Math.PI/2.0f));
+		Vec2 thisPosition = leftPosition;
+		System.out.println(leftPosition);
+		System.out.println(rightPosition);
+		for (int i=0;i<=numberOfCasts;i++) {
+			this.getWorld().getPhysicsWorld().raycast(new RayCastCallback() {
+
+				@Override
+				public float reportFixture(Fixture arg0, Vec2 arg1, Vec2 arg2,
+						float arg3) {
+					arg0.getBody().applyForce(rayDirection.mul(totalForce/numberOfCasts),arg1);
+					return 0.0f;
+				}
+				
+			},thisPosition,thisPosition.add(rayDirection.mul(20.0f)));
+			thisPosition = thisPosition.add(increment);
+		}
 	}
 	/* (non-Javadoc)
 	 * @see SimObject#draw(java.awt.Graphics)
