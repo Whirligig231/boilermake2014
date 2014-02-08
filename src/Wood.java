@@ -61,9 +61,9 @@ public class Wood extends SimObject {
 
 	@Override
 	public void reset() {
+		this.body.setActive(true);
 		this.body.setTransform(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE),
 				(float) this.angle);
-		this.body.setActive(true);
 	}
 	
 	@Override

@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferStrategy;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 import javax.swing.JPanel;
@@ -48,6 +50,8 @@ public class WorldManager implements Runnable {
 	}
 
 	private TreeSet<SimObject> allObjects;
+	private HashSet<SimObject> pendingObjects;
+	private HashSet<SimObject> doomedObjects;
 	
 	/**
 	 * Returns the value of the field called 'allObjects'.
@@ -66,6 +70,8 @@ public class WorldManager implements Runnable {
 		this.myCanvas = myCanvas;
 		this.physicsWorld = new World(GRAVITY);
 		this.allObjects = new TreeSet<SimObject>();
+		this.pendingObjects = new HashSet<SimObject>();
+		this.doomedObjects = new HashSet<SimObject>();
 		for (SimObject obj : objects) this.addObject(obj);
 		this.physicsWorld.setContactListener(new ContactListener() {
 
@@ -113,8 +119,19 @@ public class WorldManager implements Runnable {
 	}
 	
 	public void removeObject(SimObject object) {
-		this.physicsWorld.destroyBody(object.getBody());
+		if (object.getBody() != null) 
+			this.physicsWorld.destroyBody(object.getBody());
+		if (object.getAuxBody() != null)
+			this.physicsWorld.destroyBody(object.getAuxBody());
 		this.allObjects.remove(object);
+	}
+	
+	public void makeObject(SimObject object) {
+		this.pendingObjects.add(object);
+	}
+	
+	public void unmakeObject(SimObject object) {
+		this.doomedObjects.add(object);
 	}
 	
 	private void performStep() {
@@ -125,7 +142,7 @@ public class WorldManager implements Runnable {
 	
 	public void performDraw(Graphics g) {
 		for (SimObject obj : this.allObjects) {
-			if (obj.getBody() != null || obj instanceof Gate) {
+			if (obj.getBody() != null || obj.isSpecial()) {
 				obj.draw(g);
 				if (obj.isMoveable() && !this.isRunning()) {
 					float x = obj.getBody().getPosition().x*WorldManager.PHYSICS_SCALE;
@@ -143,6 +160,10 @@ public class WorldManager implements Runnable {
 			float startTimeMs = System.nanoTime()/1000000.0f;
 			float endTimeMs = startTimeMs + 1000.0f/PHYSICS_FPS;
 			this.performStep();
+			for (SimObject obj : this.pendingObjects) this.addObject(obj);
+			this.pendingObjects.clear();
+			for (SimObject obj : this.doomedObjects) this.removeObject(obj);
+			this.doomedObjects.clear();
 			float currentTimeMs = System.nanoTime()/1000000.0f;
 			while (currentTimeMs < endTimeMs) {
 				currentTimeMs = System.nanoTime()/1000000.0f;
@@ -195,8 +216,16 @@ public class WorldManager implements Runnable {
 	}
 
 	private void resetObjectPositions() {
-		for (SimObject obj : this.allObjects) {
-			obj.reset();
+		Iterator<SimObject> it = this.allObjects.iterator();
+		while (it.hasNext()) {
+			SimObject obj = it.next();
+			if (obj.resetDelete()) {
+				if (obj.getBody() != null) 
+					this.physicsWorld.destroyBody(obj.getBody());
+				if (obj.getAuxBody() != null)
+					this.physicsWorld.destroyBody(obj.getAuxBody());
+				it.remove();
+			}
 		}
 	}
 
@@ -219,6 +248,7 @@ public class WorldManager implements Runnable {
 		if (moving.getAuxBody() != null) 
 			moving.getAuxBody().setTransform(moving.getAuxBody().getPosition(),
 					(float) (moving.getAuxBody().getAngle()+wheelRotation*Math.PI/20.0f));
+		moving.setStartAngle(moving.getBody().getAngle());
 		this.myCanvas.repaint();
 	}
 
@@ -237,7 +267,6 @@ public class WorldManager implements Runnable {
 		if (this.holding.getAuxBody() != null)
 			this.holding.getAuxBody().setTransform(new Vec2(x,y).mul(
 					1.0f/WorldManager.PHYSICS_SCALE),this.holding.getAuxBody().getAngle());
-		this.holding.setStartAngle(this.holding.getBody().getAngle());
 		this.myCanvas.repaint();
 	}
 

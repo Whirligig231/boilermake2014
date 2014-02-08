@@ -19,7 +19,7 @@ public abstract class SimObject implements Comparable<SimObject> {
 	public abstract void create();
 	
 	public void destroy() {
-		this.getWorld().removeObject(this);
+		this.getWorld().unmakeObject(this);
 	}
 	public void makeMovable(boolean a){
 		this.moveable=a;
@@ -118,6 +118,20 @@ public abstract class SimObject implements Comparable<SimObject> {
 	
 	public void collideWith(SimObject other) {
 		// Default behavior: nothing
+	}
+	
+	public boolean isSpecial() {
+		return false;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public boolean resetDelete() {
+		this.reset();
+		return false;
 	}
 
 }

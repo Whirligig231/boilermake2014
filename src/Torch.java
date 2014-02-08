@@ -39,13 +39,14 @@ public class Torch extends SimObject {
 
 	@Override
 	public void step() {
-		// Nothing really needs to be done here ... yet. *evil laugh*
+		Vec2 newPos = MathHelper.randPt(24.0f).add(
+				this.getBody().getPosition().mul(WorldManager.PHYSICS_SCALE));
+		this.getWorld().makeObject(new Flame((int)newPos.x,(int)newPos.y));
 	}
 	
 	@Override
 	public void collideWith(SimObject other) {
 		if (other instanceof Wood) {
-			System.out.println("I GOT WOOD");
 			other.getBody().setActive(false);
 		}
 	}

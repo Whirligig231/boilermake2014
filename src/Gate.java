@@ -43,7 +43,6 @@ public class Gate extends SimObject {
 			Vec2 corner1 = this.position.add(MathHelper.polar(128.0f,this.angle));
 			Vec2 corner2 = this.position.add(MathHelper.polar(-128.0f,this.angle));
 			if (MathHelper.intersects(corner1,corner2,rbPos,rbNewPos)) {
-				System.out.println(corner1+" "+corner2+" "+rbPos+" "+rbNewPos);
 				this.active = true;
 				this.getWorld().checkWin();
 			}
@@ -78,5 +77,11 @@ public class Gate extends SimObject {
 	public void setStartAngle(float angle) {
 		this.angle = angle;
 	}
+	
+	@Override
+	public boolean isSpecial() {
+		return true;
+	}
+
 
 }

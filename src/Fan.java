@@ -69,7 +69,7 @@ public class Fan extends SimObject {
 				public float reportFixture(Fixture arg0, Vec2 arg1, Vec2 arg2,
 						float arg3) {
 					arg0.getBody().applyForce(rayDirection.mul(totalForce/numberOfCasts),arg1);
-					return 0.0f;
+					return 0.4f;
 				}
 				
 			},thisPosition,thisPosition.add(rayDirection.mul(20.0f)));

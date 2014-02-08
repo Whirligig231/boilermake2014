@@ -21,5 +21,11 @@ public abstract class MathHelper {
 	public static Vec2 polar(float r, float theta) {
 		return new Vec2((float)(r*Math.cos(theta)),(float)(r*Math.sin(theta)));
 	}
+	
+	public static Vec2 randPt(float r) {
+		float myR = (float) Math.sqrt(Math.random())*r;
+		float myTheta = (float) (Math.random()*2*Math.PI);
+		return new Vec2((float)(myR*Math.cos(myTheta)),(float)(myR*Math.sin(myTheta)));
+	}
 
 }
