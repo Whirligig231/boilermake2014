@@ -275,7 +275,7 @@ public class GameComponent extends JComponent {
 					SimObject temp = new Torch(5, 5, 0);
 					temp.makeMovable(true);
 					GameComponent.this.theWorld.addObject(temp);
-					((JButton)(arg0.getSource())).setText("Fan ("+GameComponent.this.torchCount
+					((JButton)(arg0.getSource())).setText("Torch ("+GameComponent.this.torchCount
 							+")");
 				}
 			}
