@@ -24,7 +24,7 @@ public class Fan extends SimObject {
 	private Vec2 startPosition;
 	private double angle;
 	
-	public Fan(int x, int y,double startAngle){
+	public Fan(int x, int y, double startAngle){
 		this.startPosition=new Vec2(x,y);
 		this.angle=startAngle;
 	}
@@ -35,10 +35,11 @@ public class Fan extends SimObject {
 	@Override
 	public void create() {
 		this.shape = new PolygonShape();
-		this.shape.setAsBox(64,16);
+		this.shape.setAsBox(0.5f,0.125f);
 		BodyDef def = new BodyDef();
 		def.type = BodyType.STATIC;
-		def.position.set(this.startPosition);
+		def.position.set(this.startPosition.mul(1/WorldManager.PHYSICS_SCALE));
+		def.angle = (float) this.angle;
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
 		this.body.createFixture(this.shape,5.0f);
@@ -55,8 +56,10 @@ public class Fan extends SimObject {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		ImageUtility.drawImage(g,"Graphics/fan.png",this.getBody().getPosition().x,
-				this.getBody().getPosition().y,this.getBody().getAngle());
+		ImageUtility.drawImage(g,"Graphics/fan.png",
+				this.getBody().getPosition().x*WorldManager.PHYSICS_SCALE,
+				this.getBody().getPosition().y*WorldManager.PHYSICS_SCALE,
+				this.getBody().getAngle());
 	}
 	/* (non-Javadoc)
 	 * @see SimObject#getBody()

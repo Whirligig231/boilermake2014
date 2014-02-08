@@ -27,7 +27,8 @@ public abstract class SimObject implements Comparable<SimObject> {
 	
 	@Override
 	public int compareTo(SimObject other) {
-		return other.depth-this.depth;
+		if (other.depth != this.depth) return other.depth-this.depth;
+		return this.hashCode()-other.hashCode();
 	}
 
 	/**

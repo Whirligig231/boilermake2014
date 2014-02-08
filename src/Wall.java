@@ -37,10 +37,10 @@ public class Wall extends SimObject {
 	@Override
 	public void create() {
 		this.shape = new PolygonShape();
-		this.shape.setAsBox(96,16);
+		this.shape.setAsBox(0.75f,0.125f);
 		BodyDef def = new BodyDef();
 		def.type = BodyType.STATIC;
-		def.position.set(this.startPosition);
+		def.position.set(this.startPosition.mul(1.0f/WorldManager.PHYSICS_SCALE));
 		def.angle = (float) this.angle;
 		def.allowSleep = true;
 		this.body = this.getWorld().getPhysicsWorld().createBody(def);
