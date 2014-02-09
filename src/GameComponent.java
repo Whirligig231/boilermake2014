@@ -503,7 +503,7 @@ public class GameComponent extends JComponent {
 		panel.add(woodText);
 		panel.add(wallText);
 		
-		this.gameFrame.add(panel);
+		this.gameFrame.add(panel,BorderLayout.EAST);
 		return text;
 	}
 }
