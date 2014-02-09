@@ -65,9 +65,9 @@ public class GameComponent extends JComponent {
 	public JFrame getFrame(){
 		
 		return this.gameFrame;
-	}
-	public GameComponent(int width, int height) {
-		this.gameFrame = new JFrame("Game");
+	}/
+	public GameComponent(int width, int height, String name) {
+		this.gameFrame = new JFrame(name);
 		this.gameFrame.setSize(width, height);
 		this.gameFrame.setVisible(true);
 		
@@ -503,7 +503,7 @@ public class GameComponent extends JComponent {
 		GridLayout grid=new GridLayout(7,1,20,20);
 		panel.setLayout(grid);
 		panel.add(bounceText);
-		panel.add(fanText);
+		panel.add(torchText);
 		panel.add(gearText);
 		panel.add(rockText);
 		panel.add(torchText);
