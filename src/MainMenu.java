@@ -49,13 +49,11 @@ public class MainMenu extends JFrame {
 		buttonPanel.setSize(600,200);
 		buttonPanel.setLayout(grid);
 		menuPanel.setLayout(new BorderLayout());
-		menuPanel.add(labelPane,BorderLayout.NORTH);
-		buttonPanel.add("start",new startButton());
-		buttonPanel.add("instr",new instrButton());
+		menuPanel.add(labelPane,BorderLayout.CENTER);
+		buttonPanel.add("single",new startButton());
+		buttonPanel.add("multi",new multiButton());
 		buttonPanel.add("Level edit",new lvlButton());
-		buttonPanel.add("exit", new exitButton());
-		menuPanel.add(name,BorderLayout.CENTER);
-		
+		buttonPanel.add("inst", new instrButton());
 		menuPanel.add(buttonPanel,BorderLayout.SOUTH);
 		menuPanel.setVisible(true);
 		buttonPanel.setVisible(true);
@@ -99,7 +97,7 @@ public class MainMenu extends JFrame {
 	private class startButton extends JButton{
 		public startButton(){
 			super();
-			this.setText("Start");
+			this.setText("Single");
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -114,25 +112,25 @@ public class MainMenu extends JFrame {
 	private class instrButton extends JButton{
 		public instrButton(){
 			super();
-			this.setText("Instructions");
+			this.setText("Info");
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(null,"");
+					new InfoFrame();
 					
 				}
 			};
 			this.addActionListener(start);
 		}
 	}
-	private class exitButton extends JButton{
-		public exitButton(){
+	private class multiButton extends JButton{
+		public multiButton(){
 			super();
-			this.setText("Exit");
+			this.setText("Multi");
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
+					new MultiFrame();
 					
 				}
 			};
