@@ -35,6 +35,7 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.addToRockCount(MAXAMOUNTOBJECTS);
 		this.gameComponent.addToGearCount(MAXAMOUNTOBJECTS);
 		this.gameComponent.addToWallCount(MAXAMOUNTOBJECTS);
+		this.gameComponent.addToWoodCount(MAXAMOUNTOBJECTS);
 		this.gameComponent.generateButtons();
 		this.gameComponent.makeLevelButton();
 		
@@ -78,19 +79,20 @@ public class LevelBuilder extends JFrame{
 		//after this point the stringbuilder has all of the file's inside objects code
 		insides.append(">");
 
+		//////////////////////////////THIS IS FOR THE BALL POSITION/////////////////////////////////
+		int ballX = -100;
+		int ballY = -100;
+		
 		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
 		String timeString = "<time " + this.time + ">";
+		String ballString = "<start [" + ballX + "," + ballY + "]>";
 		String outsides = "<off_screen #fan ["+MAXAMOUNTOBJECTS+"] #bounce [" + MAXAMOUNTOBJECTS+"] #wood[" + MAXAMOUNTOBJECTS+ "] #torch[" + MAXAMOUNTOBJECTS+ "] #rock[" + MAXAMOUNTOBJECTS+ "] #gear[" + MAXAMOUNTOBJECTS+ "] #wall[" + MAXAMOUNTOBJECTS+ "] >";
-		
-		System.out.println(sizeString);
-		System.out.println(timeString);
-		System.out.println(insides.toString());
-		System.out.println(outsides);
 		
 		try {
 			PrintWriter printwriter = new PrintWriter("./LevelBuilderFiles/" + fileName + ".txt");
 			printwriter.append(sizeString);
 			printwriter.append(timeString);
+			printwriter.append(ballString);
 			printwriter.append(insides.toString());
 			printwriter.append(outsides);
 			printwriter.close();

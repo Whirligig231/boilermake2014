@@ -62,7 +62,6 @@ public class LevelReader {
 		String startString = fileText[START_STRING_POSITION];
 		String onScreen = fileText[ON_SCREEN_STRING_POSITION];
 		String offScreen = fileText[OFF_SCREEN_STRING_POSITION];
-		String buildOrNo = fileText[BUILD_OPTION];
 		
 		processSize(sizeString);
 		processTime(timeString);
@@ -195,9 +194,9 @@ public class LevelReader {
 			ArrayList<String> objectData = processOffScreenObject(gameObjects[i]);
 			String type = objectData.get(0);
 			
-			if(type.equalsIgnoreCase("RedBall")){
-				this.gameComponent.addToBallCount(Integer.valueOf(objectData.get(1)));
-			}
+//			if(type.equalsIgnoreCase("RedBall")){
+//				this.gameComponent.addToBallCount(Integer.valueOf(objectData.get(1)));
+//			}
 			if(type.equalsIgnoreCase("fan")){
 				this.gameComponent.addToFanCount(Integer.valueOf(objectData.get(1)));
 			}
