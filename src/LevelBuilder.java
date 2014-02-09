@@ -104,11 +104,16 @@ public class LevelBuilder extends JFrame{
 			}
 		}
 		
-		HashMap<String,JTextField> map = this.gameComponent.getExternalObjectLimits();
+		HashMap<String,JTextField> map = this.gameComponent.getHashMap();
 		
 		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
 		String timeString = "<time " + this.time + ">";
 		String ballString = "<start [" + ballX + "," + ballY + "]>";
+		
+		System.out.println(map.containsKey("fan") && map.containsKey("bounce") && 
+				map.containsKey("wood") && map.containsKey("torch") && map.containsKey("rock") &&
+				map.containsKey("gear") && map.containsKey("wall"));
+		
 		String outsides = "<off_screen #fan ["+Integer.valueOf(map.get("fan").getText())+"] #bounce ["
 				+ Integer.valueOf(map.get("bounce").getText())+"] #wood[" + Integer.valueOf(map.get("wood").getText())
 				+ "] #torch[" + Integer.valueOf(map.get("torch").getText())+ "] #rock["
