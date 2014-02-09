@@ -1,0 +1,1 @@
+<size [1200,800]><time 60><on_screen ><off_screen #fan [25] #bounce [25] #wood[25] #torch[25] #rock[25] #gear[25] #wall[25] >

@@ -47,6 +47,9 @@ public class GameComponent extends JComponent {
 	private JPanel gamePanel;
 	private boolean ballCreated=false;
 	private boolean gateCreated=false;
+	private JButton makeLevel;
+	private JButton gateLevel;
+	private JButton ballLevel;
 
 	/**
 	 * Returns the value of the field called 'gamePanel'.
@@ -410,7 +413,7 @@ public class GameComponent extends JComponent {
 							temp.makeMovable(true);
 							GameComponent.this.theWorld.addObject(temp);
 							GameComponent.this.gateCreated=true;
-							GameComponent.this.makeLevelButton();
+							GameComponent.this.updateLevelButton();
 				}
 
 			}// Ball, one and only one
@@ -422,7 +425,7 @@ public class GameComponent extends JComponent {
 							temp.makeMovable(true);
 							GameComponent.this.theWorld.addObject(temp);
 							GameComponent.this.ballCreated=true;	
-							GameComponent.this.makeLevelButton();
+							GameComponent.this.updateLevelButton();
 				}
 			}//Make Level button All criteria must be met first
 			class MakeLevelButtonListner implements ActionListener {
@@ -435,20 +438,40 @@ public class GameComponent extends JComponent {
 			}
 	
 	public void makeLevelButton(){
-				smakeLevel = new JButton("Generate Level");
-				JButton gateLevel = new JButton("Generate Gate");
-				JButton ballLevel = new JButton("Generate Ball");			
+		this.gateLevel = new JButton("Generate Gate");
+		this.ballLevel = new JButton("Generate Ball");	
+		this.makeLevel = new JButton("Generate Level");		
 		GateButtonListner gateLevelListen = new GateButtonListner();
-		gateLevel.addActionListener(gateLevelListen);BallButtonListner ballLevelListen = new BallButtonListner();
+		gateLevel.addActionListener(gateLevelListen);
+		BallButtonListner ballLevelListen = new BallButtonListner();
 		ballLevel.addActionListener(ballLevelListen);
 		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();
 		makeLevel.addActionListener(makeLevelListen);
 		JPanel panel=new JPanel();
+		panel.add(ballLevel);
 		panel.add(gateLevel);
 		panel.add(makeLevel);
-		panel.add(ballLevel);
+		this.makeLevel.setEnabled(false);
 		this.gameFrame.add(panel,BorderLayout.SOUTH);
 	}
 	
-	public void updateee
+	/**
+	 * Sets the field called 'ballCreated' to the given value.
+	 * @param ballCreated The ballCreated to set.
+	 */
+	public void setBallCreated(boolean ballCreated) {
+		this.ballCreated = ballCreated;
+	}
+	/**
+	 * Sets the field called 'gateCreated' to the given value.
+	 * @param gateCreated The gateCreated to set.
+	 */
+	public void setGateCreated(boolean gateCreated) {
+		this.gateCreated = gateCreated;
+	}
+	public void updateLevelButton() {
+		if (this.ballLevel == null) return;
+		this.ballLevel.setEnabled(!this.ballCreated);
+		this.makeLevel.setEnabled(this.ballCreated && this.gateCreated);
+	}
 }

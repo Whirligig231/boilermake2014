@@ -123,6 +123,18 @@ public class WorldManager implements Runnable {
 	}
 	
 	public void removeObject(SimObject object) {
+		if (object instanceof Gate) {
+			boolean hasGate = false;
+			for (SimObject obj : this.allObjects) {
+				if (obj instanceof Gate && obj != object) hasGate = true;
+			}
+			this.myComponent.setGateCreated(hasGate);
+			this.myComponent.updateLevelButton();
+		}
+		else if (object instanceof RedBall) {
+			this.myComponent.setBallCreated(false);
+			this.myComponent.updateLevelButton();
+		}
 		if (object.getBody() != null) 
 			this.physicsWorld.destroyBody(object.getBody());
 		if (object.getAuxBody() != null)
