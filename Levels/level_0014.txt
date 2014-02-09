@@ -1,0 +1,1 @@
+<size [1200,800]><time 60><start [121,585]><on_screen #Wall [300,460,0.000]#Wall [100,459,3.142]#Wall [573,147,1.571]#Wall [499,460,0.000]#Wall [574,344,1.571]#Gate [754,142,0.000]#Gate [317,274,-2.199]><off_screen #fan [2] #bounce [3] #wood[1] #torch[0] #rock[0] #gear[1] #wall[0] >
