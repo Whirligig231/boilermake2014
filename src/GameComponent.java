@@ -65,9 +65,16 @@ public class GameComponent extends JComponent {
 	public JFrame getFrame(){
 		
 		return this.gameFrame;
-	}/
-	public GameComponent(int width, int height, String name) {
-		this.gameFrame = new JFrame(name);
+	}
+	/**
+	 * creates the game component
+	 * 
+	 *
+	 * @param width
+	 * @param height
+	 */
+	public GameComponent(int width, int height) {
+		this.gameFrame = new JFrame("Game");
 		this.gameFrame.setSize(width, height);
 		this.gameFrame.setVisible(true);
 		
@@ -140,18 +147,36 @@ public class GameComponent extends JComponent {
 		});
 		this.gameFrame.add(this.gamePanel, BorderLayout.CENTER);
 	}
+	/**
+	 * 
+	 * Special constructor for the level builder version
+	 * uses the first constructor and an additional field levelBuild 
+	 *
+	 * @param x
+	 * @param y
+	 * @param levelBuilder
+	 */
 	public GameComponent(int x, int y,LevelBuilder levelBuilder){
 		this(x,y);
 		this.levelBuilder=levelBuilder;		
 	}
 	
 	
-
+	/**
+	 * 
+	 * creates a createWorld to later be referred as theWorld
+	 *
+	 */
 	public void createWorld() {
 		// World creation
 		this.theWorld = new WorldManager(this, this.gamePanel, this.visual);
 	}
-
+	/**
+	 * 
+	 * Put here a description of what this method does.
+	 *
+	 * @param time
+	 */
 	public void setTime(int time) {
 		this.time = time;
 	}
