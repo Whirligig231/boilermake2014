@@ -476,6 +476,7 @@ public class GameComponent extends JComponent {
 		this.ballLevel.setEnabled(!this.ballCreated);
 		this.makeLevel.setEnabled(this.ballCreated && this.gateCreated);
 	}
+	
 	public LinkedList getExternalObjectLimits(){
 		LinkedList text=new LinkedList();
 		JTextField bounceText=new JTextField("Bounce Limit");

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 import javax.swing.JDialog;
@@ -40,6 +41,7 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.generateButtons();
 		this.gameComponent.makeLevelButton();
 	}
+	
 	public void setGameParts(TreeSet<SimObject> objectsDrawn){
 		for (SimObject s:objectsDrawn){
 			gameParts.add(s);
@@ -101,10 +103,15 @@ public class LevelBuilder extends JFrame{
 			}
 		}
 		
+		HashMap map = this.gameComponent.getExternalObjectLimits();
+		
 		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
 		String timeString = "<time " + this.time + ">";
 		String ballString = "<start [" + ballX + "," + ballY + "]>";
-		String outsides = "<off_screen #fan ["+MAXAMOUNTOBJECTS+"] #bounce [" + MAXAMOUNTOBJECTS+"] #wood[" + MAXAMOUNTOBJECTS+ "] #torch[" + MAXAMOUNTOBJECTS+ "] #rock[" + MAXAMOUNTOBJECTS+ "] #gear[" + MAXAMOUNTOBJECTS+ "] #wall[" + MAXAMOUNTOBJECTS+ "] >";
+		String outsides = "<off_screen #fan ["+Integer.valueOf(map.get("fan").getText())+"] #bounce ["
+				+ Integer.valueOf(map.get("bounce").getText())+"] #wood[" + Integer.valueOf(map.get("wood").getText())
+				+ "] #torch[" + Integer.valueOf(map.get("torch").getText())+ "] #rock["
+				+ Integer.valueOf(map.get("rock").getText())+ "] #gear[" + Integer.valueOf(map.get("gear").getText())+ "] #wall[" + Integer.valueOf(map.get("wall").getText())+ "] >";
 		
 		try {
 			PrintWriter printwriter = new PrintWriter("./Levels/" + fileName + ".txt");
@@ -119,8 +126,6 @@ public class LevelBuilder extends JFrame{
 		}
 		
 	}
-	
-	
 	
 	
 	private String getInsideObjectString(String name, String xPos, String yPos, String tilt){
