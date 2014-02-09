@@ -60,6 +60,8 @@ public class LevelBuilder extends JFrame{
 				System.out.println("io exception");
 			}
 		
+		
+		
 		ArrayList<SimObject> specialParts = new ArrayList<SimObject>();
 		int xPos = 100;
 		int yPos = 100;
@@ -76,15 +78,15 @@ public class LevelBuilder extends JFrame{
 				tilt = this.gameParts.get(i).getBody().getAngle();
 			}
 		}
-		
-		
-		
-		
-		
-	
-
 	}
-	
+
+	private String getInsideObjectString(String name, String xPos, String yPos, String tilt){
+		return "#" + name + " [" + xPos + "," + yPos + "," + tilt + "]";
+	}
+
+	private String getOutsideObjectString(String name, String number){
+		return "#" + name + " [" + number + "]"; 
+	}
 	
 }
 
