@@ -14,7 +14,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -476,27 +476,27 @@ public class GameComponent extends JComponent {
 		this.ballLevel.setEnabled(!this.ballCreated);
 		this.makeLevel.setEnabled(this.ballCreated && this.gateCreated);
 	}
-	public LinkedList getExternalObjectLimits(){
-		LinkedList text=new LinkedList();
+	public HashMap<String,JTextField> getExternalObjectLimits(){
+		HashMap<String,JTextField> text=new HashMap();
 		JTextField bounceText=new JTextField("Bounce Limit");
-		JTextField frameText=new JTextField("Frame Limit");
+		JTextField fanText=new JTextField("Fan Limit");
 		JTextField gearText=new JTextField("Gear Limit");
 		JTextField rockText=new JTextField("Rock Limit");
 		JTextField flameText=new JTextField("Flame Limit");
 		JTextField woodText=new JTextField("Wood Limit");
 		JTextField wallText=new JTextField("Wall Limit");
 		
-		text.add(bounceText);
-		text.add(frameText);
-		text.add(gearText);
-		text.add(rockText);
-		text.add(flameText);
-		text.add(woodText);
-		text.add(wallText);
+		text.put("bounce",bounceText);
+		text.put("fan",fanText);
+		text.put("gear",gearText);
+		text.put("rock",rockText);
+		text.put("flame",flameText);
+		text.put("wood",woodText);
+		text.put("wall",wallText);
 		
 		JPanel panel=new JPanel();
 		panel.add(bounceText);
-		panel.add(frameText);
+		panel.add(fanText);
 		panel.add(gearText);
 		panel.add(rockText);
 		panel.add(flameText);
@@ -504,5 +504,6 @@ public class GameComponent extends JComponent {
 		panel.add(wallText);
 		
 		this.gameFrame.add(panel);
+		return text;
 	}
 }
