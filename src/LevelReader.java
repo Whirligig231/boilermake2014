@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-
 public class LevelReader {
 
 	private File text;
@@ -131,31 +130,31 @@ public class LevelReader {
 			int yPosition = Integer.parseInt(objectData.get(2));
 			double tilt = Double.parseDouble(objectData.get(3));
 			
-			if(type.equals("ball")){
+			if(type.equalsIgnoreCase("RedBall")){
 				this.gameComponent.addBall(xPosition, yPosition);
 			}
-			if(type.equals("fan")){
+			if(type.equalsIgnoreCase("fan")){
 				this.gameComponent.addFan(xPosition, yPosition,tilt);
 			}
-			if(type.equals("torch")){
+			if(type.equalsIgnoreCase("torch")){
 				this.gameComponent.addTorch(xPosition, yPosition, tilt);
 			}
-			if(type.equals("wood")){
+			if(type.equalsIgnoreCase("wood")){
 				this.gameComponent.addWood(xPosition, yPosition, tilt);
 			}
-			if(type.equals("rock")){
+			if(type.equalsIgnoreCase("rock")){
 				this.gameComponent.addRock(xPosition, yPosition, tilt);
 			}
-			if(type.equals("gear")){
+			if(type.equalsIgnoreCase("gear")){
 				this.gameComponent.addGear(xPosition, yPosition, tilt);
 			}
-			if(type.equals("bounce")){
+			if(type.equalsIgnoreCase("bounce")){
 				this.gameComponent.addBounce(xPosition, yPosition,tilt);
 			}
-			if(type.equals("gate")){
+			if(type.equalsIgnoreCase("gate")){
 				this.gameComponent.addGate(xPosition,yPosition,tilt);
 			}
-			if(type.equals("wall")){
+			if(type.equalsIgnoreCase("wall")){
 				this.gameComponent.addWall(xPosition, yPosition, tilt);
 			}
 			//TO ADD ANOTHER OBJECT ON-SCREEN, COPY ONE OF THE ABOVE
@@ -196,25 +195,28 @@ public class LevelReader {
 			ArrayList<String> objectData = processOffScreenObject(gameObjects[i]);
 			String type = objectData.get(0);
 			
-			if(type.equals("fan")){
+			if(type.equalsIgnoreCase("RedBall")){
+				this.gameComponent.addToBallCount(Integer.valueOf(objectData.get(1)));
+			}
+			if(type.equalsIgnoreCase("fan")){
 				this.gameComponent.addToFanCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("bounce")){
+			if(type.equalsIgnoreCase("bounce")){
 				this.gameComponent.addToBounceCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("torch")){
+			if(type.equalsIgnoreCase("torch")){
 				this.gameComponent.addToTorchCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("wood")){
+			if(type.equalsIgnoreCase("wood")){
 				this.gameComponent.addToWoodCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("rock")){
+			if(type.equalsIgnoreCase("rock")){
 				this.gameComponent.addToRockCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("gear")){
+			if(type.equalsIgnoreCase("gear")){
 				this.gameComponent.addToGearCount(Integer.valueOf(objectData.get(1)));
 			}
-			if(type.equals("wall")){
+			if(type.equalsIgnoreCase("wall")){
 				this.gameComponent.addToWallCount(Integer.valueOf(objectData.get(1)));
 			}
 			// TO ADD ANOTHER TYPE OF OBJECT OFF-SCREEN, JUST COPY ONE OF THE ABOVE

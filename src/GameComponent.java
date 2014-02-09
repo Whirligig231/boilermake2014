@@ -394,6 +394,11 @@ public class GameComponent extends JComponent {
 				buttonPanel.add(wallAdder);
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
 	}
+	
+	public void setLevelBuilder(LevelBuilder builder){
+		this.levelBuilder = builder;
+	}
+	
 	public void makeLevelButton(){
 //		this.visual.get(0).isMoveable();
 		JButton makeLevel = new JButton("Generate Level");
