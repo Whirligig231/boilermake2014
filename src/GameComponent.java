@@ -438,9 +438,9 @@ public class GameComponent extends JComponent {
 			}
 	
 	public void makeLevelButton(){
-		this.gateLevel = new JButton("Generate Gate");
-		this.ballLevel = new JButton("Generate Ball");	
-		this.makeLevel = new JButton("Generate Level");		
+		this.gateLevel = new JButton("Add Gate");
+		this.ballLevel = new JButton("Add Red Ball");	
+		this.makeLevel = new JButton("Finalize Level");		
 		GateButtonListner gateLevelListen = new GateButtonListner();
 		gateLevel.addActionListener(gateLevelListen);
 		BallButtonListner ballLevelListen = new BallButtonListner();
