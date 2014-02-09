@@ -1,5 +1,0 @@
-<size [1200,800]>
-<time 60>
-<start [1,60]>
-<on_screen #Bounce [112,387,0.000]#Wall [370,390,0.000]#Fan [201,204,0.000]#Rock [403,87,0.000]#Fan [763,334,0.000]>
-<off_screen #fan [25] #bounce [25] #wood[25] #torch[25] #rock[25] #gear[25] #wall[25] >
