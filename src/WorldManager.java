@@ -321,8 +321,8 @@ public class WorldManager implements Runnable {
 	
 	private void onWin() {
 		// Here you go Garrett
-		Long time = System.currentTimeMillis() - this.startTime;
-		long points  = this.myComponent.totalExObj()-(this.allObjects.size()-this.myComponent.visual.size())*20 + time+20;
+		Long time = (System.currentTimeMillis() - this.startTime)/1000;
+		long points  = (this.myComponent.totalExObj()-(this.allObjects.size()-this.myComponent.visual.size()))*20 + Math.max((this.myComponent.getTime()-time)*20,0);
 		JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);
 		this.myComponent.getFrame().dispose();
 		
