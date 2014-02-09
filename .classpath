@@ -5,5 +5,12 @@
 	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/asm-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/jsonbeans-0.5.jar"/>
+	<classpathentry kind="lib" path="lib/kryo-2.20.jar"/>
+	<classpathentry kind="lib" path="lib/kryonet-2.21.jar"/>
+	<classpathentry kind="lib" path="lib/minlog-none-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/objenesis-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/reflectasm-1.07.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
