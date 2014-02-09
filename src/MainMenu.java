@@ -103,7 +103,7 @@ public class MainMenu extends JFrame {
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new LevelMenu(MainMenu.this.nametxt.getText(),MainMenu.this.opts);
+					new LevelMenu("",MainMenu.this.opts);
 					
 				}
 			};

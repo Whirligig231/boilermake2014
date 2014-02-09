@@ -354,7 +354,6 @@ public class WorldManager implements Runnable {
 			if (!(obj instanceof Gate)) continue;
 			if (!((Gate)obj).isActive()) return;
 		}
-		this.stop();
 		this.onWin();
 	}
 	
@@ -362,9 +361,7 @@ public class WorldManager implements Runnable {
 		// Here you go Garrett
 		Long time = (System.currentTimeMillis() - this.startTime)/1000;
 		long points  = (this.myComponent.totalExObj()-(this.allObjects.size()-this.myComponent.visual.size()))*20 + Math.max((this.myComponent.getTime()-time)*20,0);
-		JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);
-		this.myComponent.getFrame().dispose();
-		
+		JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);		
 	}
 	
 }
