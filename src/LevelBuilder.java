@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -23,6 +24,7 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.createWorld();
 		this.gameParts = new ArrayList<SimObject>();
 		this.setUpButtons();
+		this.gameComponent.setLevelBuilder(this);
 	}
 	public void setUpButtons(){
 		
@@ -60,26 +62,40 @@ public class LevelBuilder extends JFrame{
 				System.out.println("io exception");
 			}
 		
-		
+		StringBuilder insides = new StringBuilder();
+		insides.append("< on_screen ");
 		
 		ArrayList<SimObject> specialParts = new ArrayList<SimObject>();
-		int xPos = 100;
-		int yPos = 100;
-		double tilt = 100;
-		
-		
 		
 		for (int i=0;i<this.gameParts.size()-1;i++){
+			String name = "NAME"; // this.gameParts.get(i).getName();
 			if(this.gameParts.get(i).isSpecial()){
 				specialParts.add(this.gameParts.get(i));
 			}else{
-				xPos =(int) this.gameParts.get(i).getBody().getPosition().x;
-				yPos =(int) this.gameParts.get(i).getBody().getPosition().y;
-				tilt = this.gameParts.get(i).getBody().getAngle();
+				int xPos =(int) this.gameParts.get(i).getBody().getPosition().x;
+				int yPos =(int) this.gameParts.get(i).getBody().getPosition().y;
+				double tilt = this.gameParts.get(i).getBody().getAngle();
+				DecimalFormat df = new DecimalFormat("0.000");
+				insides.append(getInsideObjectString(name,String.valueOf(xPos),String.valueOf(yPos),df.format(tilt)));
 			}
 		}
-	}
+	
+		//after this point the stringbuilder has all of the file's inside objects code
+		insides.append(">");
 
+		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
+		String timeString = "<time " + this.time + ">";
+		String outsides = "<off_screen #fan ["+MAXAMOUNTOBJECTS+"] #bounce [" + MAXAMOUNTOBJECTS+"] #wood[" + MAXAMOUNTOBJECTS+ "] #torch[" + MAXAMOUNTOBJECTS+ "] #rock[" + MAXAMOUNTOBJECTS+ "] #gear[" + MAXAMOUNTOBJECTS+ "] #wall[" + MAXAMOUNTOBJECTS+ "] >";
+		
+		System.out.println(sizeString);
+		System.out.println(timeString);
+		System.out.println(insides.toString());
+		System.out.println(outsides);
+	}
+	
+	
+	
+	
 	private String getInsideObjectString(String name, String xPos, String yPos, String tilt){
 		return "#" + name + " [" + xPos + "," + yPos + "," + tilt + "]";
 	}
