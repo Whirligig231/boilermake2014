@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
@@ -36,14 +37,12 @@ public class MainMenu extends JFrame {
 		JPanel menuPanel = new JPanel();
 		this.setSize(600, 300);
 		JPanel name = new JPanel();
-		JLabel label = new JLabel("Red Ball");
-		label.setFont(new Font("Serif", Font.PLAIN, 40));
+		JLabel label = new JLabel("RedBall");
+		label.setFont(new Font("Sans", Font.PLAIN, 40));
+		label.setForeground(new Color(128,0,0));
 		JPanel labelPane = new JPanel();
 		labelPane.setSize(600,100);
 		labelPane.add(label);
-		this.nametxt = new JTextField();
-		this.nametxt.setText("Player 1");
-		name.add(this.nametxt);
 		
 		GridLayout grid  = new GridLayout(2,2,10,10);
 		JPanel buttonPanel = new JPanel();
