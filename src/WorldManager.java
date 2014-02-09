@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.jbox2d.callbacks.ContactImpulse;
@@ -30,6 +31,8 @@ import org.jbox2d.dynamics.contacts.Contact;
  *         Created Feb 7, 2014.
  */
 public class WorldManager implements Runnable {
+	
+	private GameComponent myComponent;
 	
 	// World's gravity
 	public static final Vec2 GRAVITY = new Vec2(0.0f,10.0f);
@@ -66,7 +69,8 @@ public class WorldManager implements Runnable {
 	private JPanel myCanvas;
 	private long startTime;
 	
-	public WorldManager(JPanel myCanvas, Collection<SimObject> objects) {
+	public WorldManager(GameComponent myComponent, JPanel myCanvas, Collection<SimObject> objects) {
+		this.myComponent = myComponent;
 		this.myCanvas = myCanvas;
 		this.physicsWorld = new World(GRAVITY);
 		this.allObjects = new TreeSet<SimObject>();
@@ -318,6 +322,9 @@ public class WorldManager implements Runnable {
 	private void onWin() {
 		// Here you go Garrett
 		Long time = System.currentTimeMillis() - this.startTime;
+		long points  = this.myComponent.totalExObj()-(this.allObjects.size()-this.myComponent.visual.size())*20 + time+20;
+		JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);
+		this.myComponent.getFrame().dispose();
 		
 	}
 	

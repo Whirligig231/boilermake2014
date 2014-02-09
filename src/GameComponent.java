@@ -53,12 +53,15 @@ public class GameComponent extends JComponent {
 	public JPanel getGamePanel() {
 		return this.gamePanel;
 	}
-
+	public JFrame getFrame(){
+		
+		return this.gameFrame;
+	}
 	public GameComponent(int width, int height) {
 		this.gameFrame = new JFrame("Game");
 		this.gameFrame.setSize(width, height);
 		this.gameFrame.setVisible(true);
-
+		
 		this.gamePanel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
@@ -70,6 +73,7 @@ public class GameComponent extends JComponent {
 			}
 
 		};
+		
 		this.gamePanel.addMouseListener(new MouseListener() {
 
 			@Override
@@ -136,7 +140,7 @@ public class GameComponent extends JComponent {
 
 	public void createWorld() {
 		// World creation
-		this.theWorld = new WorldManager(this.gamePanel, this.visual);
+		this.theWorld = new WorldManager(this, this.gamePanel, this.visual);
 	}
 
 	public void setTime(int time) {

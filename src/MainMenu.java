@@ -119,7 +119,7 @@ public class MainMenu extends JFrame {
 			ActionListener start = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(null,"Burn in hell infidile");
+					JOptionPane.showMessageDialog(null,"");
 					
 				}
 			};
