@@ -506,7 +506,7 @@ public class GameComponent extends JComponent {
 		panel.add(fanText);
 		panel.add(gearText);
 		panel.add(rockText);
-		panel.add(flameText);
+		panel.add(torchText);
 		panel.add(woodText);
 		panel.add(wallText);
 		JScrollPane pane=new JScrollPane(panel);

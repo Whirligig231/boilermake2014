@@ -36,7 +36,7 @@ public class MainMenu extends JFrame {
 		JPanel menuPanel = new JPanel();
 		this.setSize(600, 300);
 		JPanel name = new JPanel();
-		JLabel label = new JLabel("Gravity n Stuff");
+		JLabel label = new JLabel("Red Ball");
 		label.setFont(new Font("Serif", Font.PLAIN, 40));
 		JPanel labelPane = new JPanel();
 		labelPane.setSize(600,100);
