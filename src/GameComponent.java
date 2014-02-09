@@ -67,6 +67,7 @@ public class GameComponent extends JComponent {
 		return this.gameFrame;
 	}
 	public GameComponent(int width, int height) {
+		this.gameFrame = new JFrame("Game");
 		this.gameFrame.setSize(width, height);
 		this.gameFrame.setVisible(true);
 		
