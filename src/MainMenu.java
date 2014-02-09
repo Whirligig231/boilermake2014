@@ -149,10 +149,6 @@ public class MainMenu extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					GameComponent gameComponent = new GameComponent(1200,800);
 					LevelBuilder builder = new LevelBuilder(gameComponent);
-					
-					
-					new LevelBuilder(new GameComponent(1200,800));
-					
 				}
 			};
 			this.addActionListener(start);
