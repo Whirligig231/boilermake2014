@@ -45,6 +45,8 @@ public class GameComponent extends JComponent {
 	// private int
 	// private int
 	private JPanel gamePanel;
+	private boolean ballCreated=false;
+	private boolean gateCreated=false;
 
 	/**
 	 * Returns the value of the field called 'gamePanel'.
@@ -399,18 +401,59 @@ public class GameComponent extends JComponent {
 		this.levelBuilder = builder;
 	}
 	
-	public void makeLevelButton(){
-//		this.visual.get(0).isMoveable();
-		JButton makeLevel = new JButton("Generate Level");
-		class MakeLevelButtonListner implements ActionListener {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GameComponent.this.levelBuilder.setGameParts(GameComponent.this.theWorld.getAllObjects());
-				GameComponent.this.levelBuilder.writeToFile();
+	//Gate, at least one, no max
+			class GateButtonListner implements ActionListener {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+						if (GameComponent.this.theWorld.isRunning()) return;
+							SimObject temp = new Gate(5, 5, 0);
+							temp.makeMovable(true);
+							GameComponent.this.theWorld.addObject(temp);
+							GameComponent.this.gateCreated=true;
+							GameComponent.this.makeLevelButton();
+				}
+
+			}// Ball, one and only one
+			class BallButtonListner implements ActionListener {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+						if (GameComponent.this.theWorld.isRunning()) return;
+							SimObject temp = new RedBall(5, 5);
+							temp.makeMovable(true);
+							GameComponent.this.theWorld.addObject(temp);
+							GameComponent.this.ballCreated=true;	
+							GameComponent.this.makeLevelButton();
+				}
+			}//Make Level button All criteria must be met first
+			class MakeLevelButtonListner implements ActionListener {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					GameComponent.this.levelBuilder.setGameParts(GameComponent.this.theWorld.getAllObjects());
+					GameComponent.this.levelBuilder.writeToFile();
+					
+				}
 			}
-		}
+	
+	public void makeLevelButton(){
+				JButton makeLevel = new JButton("Generate Level");
+				JButton gateLevel = new JButton("Generate Gate");
+				JButton ballLevel = new JButton("Generate Ball");			
+		GateButtonListner gateLevelListen = new GateButtonListner();
+		gateLevel.addActionListener(gateLevelListen);BallButtonListner ballLevelListen = new BallButtonListner();
+		ballLevel.addActionListener(ballLevelListen);
 		MakeLevelButtonListner makeLevelListen = new MakeLevelButtonListner();
 		makeLevel.addActionListener(makeLevelListen);
-		this.gameFrame.add(makeLevel,BorderLayout.SOUTH);
+		JPanel panel=new JPanel();
+		panel.add(gateLevel);
+		if(this.ballCreated & this.gateCreated){
+		panel.add(makeLevel);
+		}else{
+			panel.remove(makeLevel);
+		}
+		if(this.ballCreated)
+		panel.remove(ballLevel);
+		if(!this.ballCreated)
+		panel.add(ballLevel);
+		this.gameFrame.add(panel,BorderLayout.SOUTH);
 	}
 }
