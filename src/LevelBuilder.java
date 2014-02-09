@@ -10,6 +10,7 @@ import java.util.TreeSet;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 public class LevelBuilder extends JFrame{
@@ -103,7 +104,7 @@ public class LevelBuilder extends JFrame{
 			}
 		}
 		
-		HashMap map = this.gameComponent.getExternalObjectLimits();
+		HashMap<String,JTextField> map = this.gameComponent.getExternalObjectLimits();
 		
 		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
 		String timeString = "<time " + this.time + ">";
