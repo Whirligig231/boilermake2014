@@ -133,5 +133,7 @@ public abstract class SimObject implements Comparable<SimObject> {
 		this.reset();
 		return false;
 	}
+	
+	public abstract String getName();
 
 }

@@ -79,4 +79,6 @@ public class Wood extends SimObject {
 		this.angle = angle;
 	}
 	
+	public String getName() {return "Wood";}
+	
 }

@@ -83,5 +83,6 @@ public class Gate extends SimObject {
 		return true;
 	}
 
+	public String getName() {return "Gate";}
 
 }

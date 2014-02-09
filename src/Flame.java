@@ -66,5 +66,7 @@ public class Flame extends SimObject {
 	public void reset() {
 		// Nothing; will delete
 	}
+	
+	public String getName() {return "Flame";}
 
 }

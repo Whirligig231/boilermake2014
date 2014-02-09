@@ -71,5 +71,7 @@ public class RedBall extends SimObject {
 	public void setStartAngle(float angle) {
 		// Not necessary
 	}
+	
+	public String getName() {return "RedBall";}
 
 }

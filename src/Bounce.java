@@ -89,5 +89,7 @@ public class Bounce extends SimObject {
 	public void setStartAngle(float angle) {
 		this.angle = angle;
 	}
+	
+	public String getName() {return "Bounce";}
 
 }
