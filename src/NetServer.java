@@ -24,6 +24,7 @@ public class NetServer {
 	private static Connection connection = null;
 	private static int port = 54555;
 	private static WaitingFrame wait;
+	private static WorldManager world;
 	public static void create() {
 		System.out.println("CREATE");
 		server = new Server();
@@ -38,6 +39,7 @@ public class NetServer {
 		Kryo kryo = server.getKryo();
 	    kryo.register(MessageCmd.class);
 	    kryo.register(MessageLevel.class);
+	    kryo.register(MessageScore.class);
 	    wait = new WaitingFrame();
 	    server.addListener(new Listener() {
 	    	@Override
@@ -46,6 +48,9 @@ public class NetServer {
 	    		System.out.println(object.getClass());
 	    		if (object == MessageCmd.MESSAGE_CONNECT)
 	    			wait.enable();
+	    		else if (object instanceof MessageScore) {
+	    			NetServer.world.setOtherPoints(((MessageScore)object).score);
+	    		}
 	    	}
 	    });
 	}
@@ -61,6 +66,24 @@ public class NetServer {
 	 */
 	public static void sendLevel(String f) {
 		connection.sendTCP(new MessageLevel(f));
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param points
+	 */
+	public static void pushScore(long points) {
+		connection.sendTCP(new MessageScore((int) points));
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param worldManager
+	 */
+	public static void setWorld(WorldManager worldManager) {
+		world = worldManager;
 	}
 	
 }

@@ -24,6 +24,7 @@ public class NetClient {
 	private static int port = 54555;
 	private static Client client = null;
 	private static WaitingFrame wait;
+	private static WorldManager world;
 
 	/**
 	 * TODO Put here a description of what this method does.
@@ -44,12 +45,16 @@ public class NetClient {
 	    Kryo kryo = client.getKryo();
 	    kryo.register(MessageCmd.class);
 	    kryo.register(MessageLevel.class);
+	    kryo.register(MessageScore.class);
 	    wait = new WaitingFrame();
 	    client.addListener(new Listener() {
 	    	@Override
 			public void received(Connection connection, Object object) {
 	    		if (object instanceof MessageLevel)
 	    			wait.play((MessageLevel)object);
+	    		else if (object instanceof MessageScore) {
+	    			NetClient.world.setOtherPoints(((MessageScore)object).score);
+	    		}
 	    	}
 	    });
 	    client.sendTCP(MessageCmd.MESSAGE_CONNECT);
@@ -57,6 +62,24 @@ public class NetClient {
 	
 	public static boolean isNet() {
 		return client != null;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param points
+	 */
+	public static void pushScore(long points) {
+		client.sendTCP(new MessageScore((int) points));
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param worldManager
+	 */
+	public static void setWorld(WorldManager worldManager) {
+		world = worldManager;
 	}
 
 }

@@ -69,7 +69,25 @@ public class WorldManager implements Runnable {
 	private JPanel myCanvas;
 	private long startTime;
 	
+	private long timeLeftMs = 600000;
+	private int myBest = 0;
+	private int otherBest = 0;
+	private WorldTimer timer;
+	private Thread timeT;
+	
 	public WorldManager(GameComponent myComponent, JPanel myCanvas, Collection<SimObject> objects) {
+		if (NetClient.isNet() || NetServer.isNet()) {
+			this.timer = new WorldTimer(this);
+			Thread t = new Thread(this.timer);
+			t.start();
+			this.timeT = t;
+		}
+		if (NetClient.isNet()) {
+			NetClient.setWorld(this);
+		}
+		else if (NetServer.isNet()) {
+			NetServer.setWorld(this);
+		}
 		this.myComponent = myComponent;
 		this.myCanvas = myCanvas;
 		this.physicsWorld = new World(GRAVITY);
@@ -175,6 +193,12 @@ public class WorldManager implements Runnable {
 					((Graphics2D)g).fill(el);
 				}
 			}
+		}
+		if (NetClient.isNet() || NetServer.isNet()) {
+			g.setColor(new Color(128,0,0));
+			g.drawString("Time remaining: "+(this.timeLeftMs/1000.0f),800,20);
+			g.drawString("My best: "+this.myBest,800,40);
+			g.drawString("Opponent's best: "+this.otherBest,800,60);
 		}
 	}
 	
@@ -361,7 +385,57 @@ public class WorldManager implements Runnable {
 		// Here you go Garrett
 		Long time = (System.currentTimeMillis() - this.startTime)/1000;
 		long points  = (this.myComponent.totalExObj()-(this.allObjects.size()-this.myComponent.visual.size()))*20 + Math.max((this.myComponent.getTime()-time)*20,0);
-		JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);		
+		if (NetClient.isNet()) {
+			if (points > this.myBest) {
+				this.myBest = (int) points;
+				NetClient.pushScore(points);
+			}
+		}
+		else if (NetServer.isNet()) {
+			if (points > this.myBest) {
+				this.myBest = (int) points;
+				NetServer.pushScore(points);
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(myCanvas,"Victory! Your Score is: " + points);
+			this.myComponent.getFrame().dispose();
+		}
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	@SuppressWarnings("deprecation")
+	public void timer() {
+		if (NetClient.isNet() || NetServer.isNet()) {
+			this.timeLeftMs -= 1000/PHYSICS_FPS;
+			if (this.timeLeftMs < 0) {
+				if (this.myBest > this.otherBest) {
+					JOptionPane.showMessageDialog(myCanvas,"Victory! You won "+this.myBest+" to "+this.otherBest);
+				}
+				else if (this.myBest < this.otherBest) {
+					JOptionPane.showMessageDialog(myCanvas,"Defeat! You lost "+this.myBest+" to "+this.otherBest);
+				}
+				else if (this.myBest == this.otherBest) {
+					JOptionPane.showMessageDialog(myCanvas,"Tie game! You tied "+this.myBest+" to "+this.otherBest);
+				}
+				this.myComponent.getFrame().dispose();
+				this.timeT.stop();
+			}
+			this.myCanvas.repaint();
+		}
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param score
+	 */
+	public void setOtherPoints(int score) {
+		this.otherBest = score;
+		
 	}
 	
 }
