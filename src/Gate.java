@@ -79,9 +79,23 @@ public class Gate extends SimObject {
 	}
 	
 	@Override
+	public double getStartAngle() {
+		return this.angle;
+	}
+	
+	@Override
 	public boolean isSpecial() {
 		return true;
 	}
 
+	public String getName() {return "Gate";}
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public Vec2 getPosition() {
+		return this.position;
+	}
 
 }

@@ -81,5 +81,12 @@ public class Torch extends SimObject {
 	public void setStartAngle(float angle) {
 		// Not necessary
 	}
+	
+	@Override
+	public double getStartAngle() {
+		return 0.0f;
+	}
+	
+	public String getName() {return "Torch";}
 
 }

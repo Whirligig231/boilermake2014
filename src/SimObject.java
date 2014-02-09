@@ -133,5 +133,14 @@ public abstract class SimObject implements Comparable<SimObject> {
 		this.reset();
 		return false;
 	}
+	
+	public abstract String getName();
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public abstract double getStartAngle();
 
 }

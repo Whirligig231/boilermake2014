@@ -146,7 +146,9 @@ public class GameComponent extends JComponent {
 	public void setTime(int time) {
 		this.time = time;
 	}
-
+	public int getTime(){
+		return this.time;
+	}
 	public void addBall(int x, int y) {
 		SimObject temp = new RedBall(x, y);
 		this.visual.add(temp);

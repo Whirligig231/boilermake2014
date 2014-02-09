@@ -79,5 +79,12 @@ public class Wall extends SimObject {
 	public void setStartAngle(float angle) {
 		this.angle = angle;
 	}
+	
+	@Override
+	public double getStartAngle() {
+		return this.angle;
+	}
+	
+	public String getName() {return "Wall";}
 
 }
