@@ -27,6 +27,7 @@ public class LevelBuilder extends JFrame{
 		this.setUpButtons();
 		this.gameComponent.setLevelBuilder(this);
 	}
+	
 	public void setUpButtons(){
 		
 		this.gameComponent.addToFanCount(MAXAMOUNTOBJECTS);
@@ -38,7 +39,6 @@ public class LevelBuilder extends JFrame{
 		this.gameComponent.addToWoodCount(MAXAMOUNTOBJECTS);
 		this.gameComponent.generateButtons();
 		this.gameComponent.makeLevelButton();
-		
 	}
 	public void setGameParts(TreeSet<SimObject> objectsDrawn){
 		for (SimObject s:objectsDrawn){
