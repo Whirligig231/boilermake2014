@@ -435,7 +435,7 @@ public class GameComponent extends JComponent {
 			}
 	
 	public void makeLevelButton(){
-				JButton makeLevel = new JButton("Generate Level");
+				smakeLevel = new JButton("Generate Level");
 				JButton gateLevel = new JButton("Generate Gate");
 				JButton ballLevel = new JButton("Generate Ball");			
 		GateButtonListner gateLevelListen = new GateButtonListner();
@@ -445,15 +445,10 @@ public class GameComponent extends JComponent {
 		makeLevel.addActionListener(makeLevelListen);
 		JPanel panel=new JPanel();
 		panel.add(gateLevel);
-		if(this.ballCreated & this.gateCreated){
 		panel.add(makeLevel);
-		}else{
-			panel.remove(makeLevel);
-		}
-		if(this.ballCreated)
-		panel.remove(ballLevel);
-		if(!this.ballCreated)
 		panel.add(ballLevel);
 		this.gameFrame.add(panel,BorderLayout.SOUTH);
 	}
+	
+	public void updateee
 }
