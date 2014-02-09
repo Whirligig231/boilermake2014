@@ -81,6 +81,7 @@ public class LevelBuilder extends JFrame{
 				insides.append(getInsideObjectString(name,String.valueOf(xPos),String.valueOf(yPos),df.format(tilt)));
 				continue;
 			}
+			if (this.gameParts.get(i).isSpecial()) continue;
 			String name = this.gameParts.get(i).getName();
 			int xPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).x;
 			int yPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).y;

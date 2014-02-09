@@ -38,7 +38,12 @@ public class LevelMenu extends JFrame {
 		label.setFont(new Font("Serif", Font.PLAIN, 40));
 		pane.add(label);
 		for(int i = 1; i<files.length+1; i++){
-			pane.add(new lvlButton(files[i-1].getName()));
+			System.out.println(files[i-1].getName());
+			if(files[i-1].getName().contains("."))
+				pane.add(new lvlButton((files[i-1].getName().substring(0, files[i-1].getName().indexOf(".")))));
+			
+			else
+				pane.add(new lvlButton(files[i-1].getName()));
 		}
 		JScrollPane pain = new JScrollPane(pane);
 		
