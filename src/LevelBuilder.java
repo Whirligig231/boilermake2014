@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -63,21 +64,15 @@ public class LevelBuilder extends JFrame{
 			}
 		
 		StringBuilder insides = new StringBuilder();
-		insides.append("< on_screen ");
-		
-		ArrayList<SimObject> specialParts = new ArrayList<SimObject>();
+		insides.append("<on_screen ");
 		
 		for (int i=0;i<this.gameParts.size()-1;i++){
-			String name = "NAME"; // this.gameParts.get(i).getName();
-			if(this.gameParts.get(i).isSpecial()){
-				specialParts.add(this.gameParts.get(i));
-			}else{
-				int xPos =(int) this.gameParts.get(i).getBody().getPosition().x;
-				int yPos =(int) this.gameParts.get(i).getBody().getPosition().y;
+			String name = this.gameParts.get(i).getName();
+				int xPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).x;
+				int yPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).y;
 				double tilt = this.gameParts.get(i).getBody().getAngle();
 				DecimalFormat df = new DecimalFormat("0.000");
 				insides.append(getInsideObjectString(name,String.valueOf(xPos),String.valueOf(yPos),df.format(tilt)));
-			}
 		}
 	
 		//after this point the stringbuilder has all of the file's inside objects code
@@ -91,6 +86,18 @@ public class LevelBuilder extends JFrame{
 		System.out.println(timeString);
 		System.out.println(insides.toString());
 		System.out.println(outsides);
+		
+		try {
+			PrintWriter printwriter = new PrintWriter("./LevelBuilderFiles/" + fileName + ".txt");
+			printwriter.append(sizeString);
+			printwriter.append(timeString);
+			printwriter.append(insides.toString());
+			printwriter.append(outsides);
+			printwriter.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
