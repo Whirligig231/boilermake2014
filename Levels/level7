@@ -1,0 +1,6 @@
+<size [1200,800]>
+<time 60>
+<start [200,600]>
+<on_screen #wall [100,100,0] #wall[500,100,0] #wall [872,100,1.5708] #wall [951,205,0] #gate [980,100,5.4977]>
+<off_screen  #fan [5] #bounce [5] #rock [3] #wood [2] #wall [2]>
+<end>

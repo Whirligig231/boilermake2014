@@ -1,0 +1,8 @@
+<size [1200,800]>
+<time 60>
+<start [150,100]>
+<on_screen  #gate [600,450,0.8] #bounce[600,400,0]#bounce[550,400,0]#bounce[650,400,0]#bounce[700,400,0]#bounce[400,400,0]#bounce[420,420,0]
+#bounce[720,420,0]#bounce[480,480,0]#bounce[780,480,0]#bounce[520,520,0]#bounce[820,520,0]#bounce[600,400,0]#bounce[600,400,0]#bounce[600,400,0]
+>
+<off_screen  #fan [5] #bounce [1] #wood[4] #torch[0] #rock[1] #gear[1]>
+<end>;
