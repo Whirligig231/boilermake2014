@@ -1,6 +1,0 @@
-<size [1200,800]>
-<time 60>
-<start [150,100]>
-<on_screen  #gate [600,450,0.8] #wood [600,100,1.5708] #wood [600,100,0] #wood [600,100,2]>
-<off_screen  #fan [5] #bounce [1] #wood[10] #torch[7] #rock[1] #gear[1]>
-<end>;
