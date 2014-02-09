@@ -6,6 +6,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -244,7 +245,8 @@ public class GameComponent extends JComponent {
 	
 	public void generateButtons() {
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+		GridLayout grid1=new GridLayout(8,1,20,20);
+		buttonPanel.setLayout(grid1);
 		JButton start = new JButton("Start");
 		class StartButtonListner implements ActionListener {
 			@Override
@@ -381,6 +383,7 @@ public class GameComponent extends JComponent {
 		gearAdder.addActionListener(gearListn);
 		buttonPanel.add(gearAdder);
 		JScrollPane buttonScroll = new JScrollPane(buttonPanel);
+		
 		// Wall Button
 				JButton wallAdder = new JButton("Wall (" + this.wallCount + ")");
 				class WallButtonListner implements ActionListener {
@@ -484,7 +487,7 @@ public class GameComponent extends JComponent {
 		JTextField fanText=new JTextField("Fan Limit");
 		JTextField gearText=new JTextField("Gear Limit");
 		JTextField rockText=new JTextField("Rock Limit");
-		JTextField flameText=new JTextField("Flame Limit");
+		JTextField torchText=new JTextField("Torch Limit");
 		JTextField woodText=new JTextField("Wood Limit");
 		JTextField wallText=new JTextField("Wall Limit");
 		
@@ -492,11 +495,13 @@ public class GameComponent extends JComponent {
 		text.put("fan",fanText);
 		text.put("gear",gearText);
 		text.put("rock",rockText);
-		text.put("flame",flameText);
+		text.put("torch",torchText);
 		text.put("wood",woodText);
 		text.put("wall",wallText);
 		
 		JPanel panel=new JPanel();
+		GridLayout grid=new GridLayout(7,1,20,20);
+		panel.setLayout(grid);
 		panel.add(bounceText);
 		panel.add(fanText);
 		panel.add(gearText);
@@ -504,8 +509,9 @@ public class GameComponent extends JComponent {
 		panel.add(flameText);
 		panel.add(woodText);
 		panel.add(wallText);
+		JScrollPane pane=new JScrollPane(panel);
 		
-		this.gameFrame.add(panel,BorderLayout.EAST);
+		this.gameFrame.add(pane,BorderLayout.EAST);
 		this.text=text;
 	}
 	public HashMap<String,JTextField> getHashMap(){
