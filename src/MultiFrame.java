@@ -1,6 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
@@ -72,6 +73,9 @@ public class MultiFrame extends JFrame {
 		ActionListener join = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane namePrompt = new JOptionPane();
+				
+				String fileName = namePrompt.showInputDialog("Enter the Host's IP Address");
 				
 				
 			}
