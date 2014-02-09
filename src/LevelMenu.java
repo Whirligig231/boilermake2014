@@ -60,6 +60,7 @@ public class LevelMenu extends JFrame {
 					File f = new File("./Levels/" + file);
 					if (!f.exists()) f = new File("./Levels/" + file + ".txt");
 					LevelReader lvl = new LevelReader(f);
+					if (NetServer.isNet()) NetServer.sendLevel(file);
 					// TODO add level thing
 				}
 			};

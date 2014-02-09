@@ -56,8 +56,7 @@ public class MultiFrame extends JFrame {
 		ActionListener host = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				NetServer.create();
 			}
 		};
 		this.addActionListener(host);
@@ -75,9 +74,9 @@ public class MultiFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane namePrompt = new JOptionPane();
 				
-				String fileName = namePrompt.showInputDialog("Enter the Host's IP Address");
+				String hostIp = namePrompt.showInputDialog("Enter the Host's IP Address");
 				
-				
+				NetClient.create(hostIp);
 			}
 		};
 		this.addActionListener(join);

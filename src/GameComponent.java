@@ -404,6 +404,7 @@ public class GameComponent extends JComponent {
 				wallAdder.addActionListener(wallListn);
 				buttonPanel.add(wallAdder);
 		this.gameFrame.add(buttonScroll, BorderLayout.WEST);
+		this.gameFrame.revalidate();
 	}
 	
 	public void setLevelBuilder(LevelBuilder builder){
