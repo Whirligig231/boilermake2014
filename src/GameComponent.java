@@ -52,7 +52,8 @@ public class GameComponent extends JComponent {
 	private JButton makeLevel;
 	private JButton gateLevel;
 	private JButton ballLevel;
-
+	private HashMap<String,JTextField> text;
+	
 	/**
 	 * Returns the value of the field called 'gamePanel'.
 	 * @return Returns the gamePanel.
@@ -455,6 +456,7 @@ public class GameComponent extends JComponent {
 		panel.add(makeLevel);
 		this.makeLevel.setEnabled(false);
 		this.gameFrame.add(panel,BorderLayout.SOUTH);
+		this.getExternalObjectLimits();
 	}
 	
 	/**
@@ -476,7 +478,7 @@ public class GameComponent extends JComponent {
 		this.ballLevel.setEnabled(!this.ballCreated);
 		this.makeLevel.setEnabled(this.ballCreated && this.gateCreated);
 	}
-	public HashMap<String,JTextField> getExternalObjectLimits(){
+	public void getExternalObjectLimits(){
 		HashMap<String,JTextField> text=new HashMap();
 		JTextField bounceText=new JTextField("Bounce Limit");
 		JTextField fanText=new JTextField("Fan Limit");
@@ -504,6 +506,9 @@ public class GameComponent extends JComponent {
 		panel.add(wallText);
 		
 		this.gameFrame.add(panel,BorderLayout.EAST);
-		return text;
+		this.text=text;
+	}
+	public HashMap<String,JTextField> getHashMap(){
+		return this.text;
 	}
 }
