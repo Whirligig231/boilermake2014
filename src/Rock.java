@@ -86,6 +86,11 @@ public class Rock extends SimObject {
 		this.angle = angle;
 	}
 	
+	@Override
+	public double getStartAngle() {
+		return this.angle;
+	}
+	
 	public String getName() {return "Rock";}
 
 }

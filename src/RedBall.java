@@ -72,6 +72,11 @@ public class RedBall extends SimObject {
 		// Not necessary
 	}
 	
+	@Override
+	public double getStartAngle() {
+		return 0.0f;
+	}
+	
 	public String getName() {return "RedBall";}
 
 }

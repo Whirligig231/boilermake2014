@@ -122,6 +122,11 @@ public class Gear extends SimObject {
 		this.angle = angle;
 	}
 	
+	@Override
+	public double getStartAngle() {
+		return this.angle;
+	}
+	
 	public String getName() {return "Gear";}
 
 }

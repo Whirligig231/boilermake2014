@@ -58,6 +58,11 @@ public class Flame extends SimObject {
 	}
 	
 	@Override
+	public double getStartAngle() {
+		return 0.0;
+	}
+	
+	@Override
 	public boolean isSpecial() {
 		return true;
 	}

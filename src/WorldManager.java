@@ -183,6 +183,16 @@ public class WorldManager implements Runnable {
 	
 	public SimObject getObject(Vec2 point) {
 		for (SimObject obj : this.allObjects.descendingSet()) {
+			if (!obj.isMoveable()) continue;
+			if (obj instanceof Gate) {
+				// Do the collision math
+				Vec2 center = ((Gate)obj).getPosition();
+				Vec2 dir = MathHelper.polar(1.0f,(float) obj.getStartAngle());
+				Vec2 diff = point.sub(center);
+				Vec2 proj = dir.mul(Vec2.dot(diff,dir)/Vec2.dot(dir,dir));
+				Vec2 rej = diff.sub(proj);
+				if (proj.length() < 128.0f && rej.length() < 16.0f) return obj;
+			}
 			if (obj.getBody() == null) continue;
 			Fixture fix = obj.getBody().getFixtureList();
 			if (fix.testPoint(point.mul(1.0f/WorldManager.PHYSICS_SCALE))) return obj;
@@ -247,6 +257,10 @@ public class WorldManager implements Runnable {
 		SimObject moving = this.getObject(new Vec2(x,y));
 		if (moving == null) return;
 		if (!moving.isMoveable()) return;
+		if (moving instanceof Gate) {
+			moving.setStartAngle((float) (moving.getStartAngle()+wheelRotation*Math.PI/20.0f));
+			return;
+		}
 		moving.getBody().setTransform(moving.getBody().getPosition(),
 				(float) (moving.getBody().getAngle()+wheelRotation*Math.PI/20.0f));
 		if (moving.getAuxBody() != null) 
@@ -266,6 +280,10 @@ public class WorldManager implements Runnable {
 	public void handleDrag(int x, int y, int button) {
 		if (this.running) return;
 		if (this.holding == null) return;
+		if (this.holding instanceof Gate) {
+			this.holding.setStartPosition(x,y);
+			return;
+		}
 		this.holding.getBody().setTransform(new Vec2(x,y).mul(
 				1.0f/WorldManager.PHYSICS_SCALE),this.holding.getBody().getAngle());
 		if (this.holding.getAuxBody() != null)
