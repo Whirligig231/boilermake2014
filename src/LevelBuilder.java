@@ -54,7 +54,7 @@ public class LevelBuilder extends JFrame{
 		
 		//actually create a new file under the level builder's files
 		try{
-			FileOutputStream stream = new FileOutputStream("./LevelBuilderFiles/" + fileName + ".txt");
+			FileOutputStream stream = new FileOutputStream("./Levels/" + fileName + ".txt");
 			stream.close();
 			}
 			catch(FileNotFoundException e){
@@ -67,21 +67,39 @@ public class LevelBuilder extends JFrame{
 		StringBuilder insides = new StringBuilder();
 		insides.append("<on_screen ");
 		
-		for (int i=0;i<this.gameParts.size()-1;i++){
-			String name = this.gameParts.get(i).getName();
-				int xPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).x;
-				int yPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).y;
-				double tilt = this.gameParts.get(i).getBody().getAngle();
+		for (int i=0;i<this.gameParts.size();i++){
+			if (this.gameParts.get(i) instanceof RedBall) continue;
+			if (this.gameParts.get(i) instanceof Gate) {
+				String name = this.gameParts.get(i).getName();
+				int xPos =(int) ((Gate)this.gameParts.get(i)).getPosition().x;
+				int yPos =(int) ((Gate)this.gameParts.get(i)).getPosition().y;
+				double tilt = this.gameParts.get(i).getStartAngle();
 				DecimalFormat df = new DecimalFormat("0.000");
 				insides.append(getInsideObjectString(name,String.valueOf(xPos),String.valueOf(yPos),df.format(tilt)));
+				continue;
+			}
+			String name = this.gameParts.get(i).getName();
+			int xPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).x;
+			int yPos =(int) this.gameParts.get(i).getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).y;
+			double tilt = this.gameParts.get(i).getBody().getAngle();
+			DecimalFormat df = new DecimalFormat("0.000");
+			insides.append(getInsideObjectString(name,String.valueOf(xPos),String.valueOf(yPos),df.format(tilt)));
 		}
 	
 		//after this point the stringbuilder has all of the file's inside objects code
 		insides.append(">");
+		
+		System.out.println(insides.toString());
 
 		//////////////////////////////THIS IS FOR THE BALL POSITION/////////////////////////////////
 		int ballX = -100;
 		int ballY = -100;
+		for (SimObject s : this.gameParts) {
+			if (s instanceof RedBall) {
+				ballX = (int) s.getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).x;
+				ballY = (int) s.getBody().getPosition().mul(WorldManager.PHYSICS_SCALE).y;
+			}
+		}
 		
 		String sizeString = "<size " + "[" + WIDTH + "," + HEIGHT + "]>";
 		String timeString = "<time " + this.time + ">";
@@ -89,7 +107,7 @@ public class LevelBuilder extends JFrame{
 		String outsides = "<off_screen #fan ["+MAXAMOUNTOBJECTS+"] #bounce [" + MAXAMOUNTOBJECTS+"] #wood[" + MAXAMOUNTOBJECTS+ "] #torch[" + MAXAMOUNTOBJECTS+ "] #rock[" + MAXAMOUNTOBJECTS+ "] #gear[" + MAXAMOUNTOBJECTS+ "] #wall[" + MAXAMOUNTOBJECTS+ "] >";
 		
 		try {
-			PrintWriter printwriter = new PrintWriter("./LevelBuilderFiles/" + fileName + ".txt");
+			PrintWriter printwriter = new PrintWriter("./Levels/" + fileName + ".txt");
 			printwriter.append(sizeString);
 			printwriter.append(timeString);
 			printwriter.append(ballString);
