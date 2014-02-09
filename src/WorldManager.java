@@ -278,6 +278,7 @@ public class WorldManager implements Runnable {
 		if (!moving.isMoveable()) return;
 		if (moving instanceof Gate) {
 			moving.setStartAngle((float) (moving.getStartAngle()+wheelRotation*Math.PI/20.0f));
+			this.myCanvas.repaint();
 			return;
 		}
 		moving.getBody().setTransform(moving.getBody().getPosition(),
@@ -301,6 +302,7 @@ public class WorldManager implements Runnable {
 		if (this.holding == null) return;
 		if (this.holding instanceof Gate) {
 			this.holding.setStartPosition(x,y);
+			this.myCanvas.repaint();
 			return;
 		}
 		this.holding.getBody().setTransform(new Vec2(x,y).mul(
